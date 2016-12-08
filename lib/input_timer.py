@@ -108,4 +108,5 @@ if leftshift_held: leftshift_held_time += 1
 if rightcontrol_held: rightcontrol_held_time += 1
 if leftcontrol_held: leftcontrol_held_time += 1
 if alt_held: alt_held_time += 1
-#! Go through and remove untimed keys. I imagine this uses a fair proportion of CPU
+#! Go through and remove untimed keys;
+# I imagine this uses a fair proportion of CPU (unsure though)

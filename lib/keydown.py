@@ -104,6 +104,11 @@ elif event.key == 304: leftshift_held = 1
 elif event.key == 305: rightcontrol_held = 1
 elif event.key == 306: leftcontrol_held = 1
 elif event.key == 308: alt_held = 1
-#! shift_held = rightshift_held or leftshift_held       #! remove these or remove the separated ones above.
-#! control_held = rightcontrol_held or leftcontrol_held #! if you keep these, you need to add recognition for them in keyup.py
-#! Go through this at the end and decide if everything needs keeping. Especially if left/right shift/control need separate things at all.
+#! Remove these (below) or remove the separated ones above. If you keep them,
+# you need to add recognition for them in keyup.py
+
+#! shift_held = rightshift_held or leftshift_held
+#! control_held = rightcontrol_held or leftcontrol_held
+
+#! Go through this at the end and decide if everything needs keeping.
+# Especially if left/right shift/control need separate things at all.
