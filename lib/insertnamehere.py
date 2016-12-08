@@ -115,9 +115,7 @@ try:    # Creating variables for keyboard and mouse inputs
 except Exception as error:
     log("Failed to initialise keyboard/mouse input variabes")
 # Text input related variables
-accepting_text = False  # Showing whether the program is accepting text input from the user
-input_text = ""         # The input text from the user
-maximum_characters = 0  # The maximum amount of allowed characters in an input text
+execfile("text_input.py")
 
 def return_key(n):
     """Returns the keyboard key with key n in pygame.key.get_pressed()"""
@@ -154,8 +152,7 @@ try:
 except Exception as error:
     log("Failed to initialise essential display variables")
 #!!! TEST - REMOVE
-accepting_text = True
-maximum_characters = 50
+TextInput.take_input(50, "test")
 #!!! TEST - REMOVE
 ## Game window while loop
 while ongoing:
@@ -182,7 +179,7 @@ while ongoing:
     screen.fill((0, 0, 0))
     screen.blit(pygame.font.SysFont(
         "Arial Black", 40, False, False
-        ).render(input_text, True, (255, 255, 255)), (0, 0))
+        ).render(TextInput.text, True, (255, 255, 255)), (0, 0))
     #!!! TEST - REMOVE
     try:    # Receiving user inputs
         for event in pygame.event.get():
@@ -204,33 +201,16 @@ while ongoing:
                     right_held = 0
             elif event.type == pygame.KEYDOWN:
                 execfile("keydown.py")
-                if accepting_text:
-                    if event.key == 8 and input_text != "":
-                        input_text = input_text[:-1]
-                    elif event.key == 9:
-                        #! This (above) is the TAB key. Perhaps it should
-                        # make the cursor go to the next box and this
-                        # would be a good place to do it, since it would
-                        # only be applicable when inputting text.
-                        # The only reason this would be pointless is if
-                        # there are never two text boxes to fill in on
-                        # the same screen, which isn't that unlikely,
-                        # so it may actually be pointless.
-                        pass
-                    elif event.key == 13:
-                        # This is the enter key. It will cause the text to be accepted.
-                        accepting_text = False
-                    elif len(input_text) < maximum_characters:
-                        input_text = "".join((input_text, event.unicode))
+                TextInput.receive_single_characters()
             elif event.type == pygame.KEYUP:
                 execfile("keyup.py")
     except Exception as error:
         log("Failed to receive user inputs correctly")
 
-    if accepting_text:
-        keys = pygame.key.get_pressed()
-        (numlock, capslock) = (keys[300], keys[301])
-        execfile("multiple_character_input.py")
+    try:
+        TextInput.receive_multiple_characters()
+    except Exception as error:
+        log("Failed to receive multiple characters for text input correctly")
 
     frame += 1
     try:
