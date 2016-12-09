@@ -1,5 +1,6 @@
 # Defining a function to load images
 def load_image(image_name, fade_enabled=False):
+    """fade_enabled should be True if you want images to be able to fade"""
     try:
         #! Add stuff for loading images of the correct resolution
         # depending on the player's resolution settings

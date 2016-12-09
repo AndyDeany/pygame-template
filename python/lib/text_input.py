@@ -40,7 +40,7 @@ class TextInput(object):
             elif event.key == 13:
                 # This is the enter key. It will cause the text to be accepted.
                 self.accepting_text = False
-                locals()[destination]
+                globals()[self.destination] = self.text
             elif len(self.text) < self.max_characters:
                 self.text = "".join((self.text, event.unicode))
 
