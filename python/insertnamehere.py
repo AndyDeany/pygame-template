@@ -46,6 +46,11 @@ except Exception as error:
 current = "main menu"   # The part of the game the screen is showing
 fps = 60
 frame = 1   # The current frame the game is on (since the game was opened)
+# Console
+console_font = pygame.font.SysFont("consolas", 15)
+console_colour = (255, 255, 255)    # white
+show_fps = False
+show_fps_y = screen_width - console_font.size("FPS: 000")[0]
 # Creating variables for keyboard and mouse inputs
 execfile("helper\\reset_inputs.py")
 execfile("helper\\input_attributes.py")
@@ -128,6 +133,8 @@ while ongoing:
                 execfile("helper\\keydown.py")
                 if alt_held and f4_held and f4_held_time < alt_held_time:
                     ongoing = False     # Quits the game. Add an "are you sure" prompt if you want
+                elif leftcontrol_held and f_held and f_held_time < leftcontrol_held_time:
+                    show_fps = not show_fps
                 TextInput.receive_single_characters()
             elif event.type == pygame.KEYUP:
                 execfile("helper\\keyup.py")
@@ -138,6 +145,10 @@ while ongoing:
         TextInput.receive_multiple_characters()
     except Exception as error:
         log("Failed to receive multiple characters for text input correctly")
+
+    if show_fps:
+        screen.blit(console_font.render("FPS: " + str(int(clock.get_fps())),
+                                        True, console_colour), (show_fps_y, 0))
 
     frame += 1
     try:
