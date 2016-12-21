@@ -30,7 +30,6 @@ class Game(object):
     def __init__(self, resolution, mode="windowed"):
         # Base setup
         self.directory = os.getcwd()
-        print self.directory
         self.error = "Details unknown"  # Default error message
 
         try:
