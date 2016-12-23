@@ -83,7 +83,8 @@ class Input(object):
         try:
             next((button for button in self.buttons.values() if button.number == number)).press()
         except Exception as self.game.error:
-            self.game.log("Failed to process a mouse being pressed [event number=", number, "]")
+            self.game.log("Failed to process a button being pressed [event number=", number, "]")
+            n
 
     def buttonup(self, number):
         try:
