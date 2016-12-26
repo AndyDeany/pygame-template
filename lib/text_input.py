@@ -42,7 +42,7 @@ class TextInput(object):
     def disable(self):
         """Disables text input from being taken from the user."""
         self.accepting_text = False
-        self.output.insert(0, self.text)
+        self.inputs.insert(0, self.text)
         setattr(TextInput, "active", False)
 
     def most_recent(self):
@@ -125,7 +125,8 @@ class TextInput(object):
                             ))) > 0.5):
                         self.keys = active_instance.game.pygame.key.get_pressed()
                         # Checking that only one key that provides a character input is pressed.
-                        if sum(map(return_key, self.character_keys)) == 1:
+                        if (sum(map(return_key, self.character_keys)) == 1 and
+                                active_instance.text != ""):
                             active_instance.text += active_instance.text[-1]
             except Exception as active_instance.game.error:
                 active_instance.game.log("Failed to receive text input from held keys")
