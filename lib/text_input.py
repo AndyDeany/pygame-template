@@ -78,7 +78,7 @@ class TextInput(object):
                         # so it may actually be pointless.
                         pass
                     elif event.key in [13, 271]:    # Enter and numpad enter
-                        active_instance.confirm()
+                        active_instance.disable()
                     elif len(active_instance.text) < active_instance.max_characters:
                         active_instance.text = "".join((active_instance.text, event.unicode))
             except Exception as active_instance.game.error:
