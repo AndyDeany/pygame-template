@@ -21,6 +21,7 @@ except ImportError:
 from system import System
 from console import Console
 from userinput import Input
+from text_input import TextInput
 from hotkey import Hotkey
 # Main
 # from [file] import [class]
@@ -55,7 +56,8 @@ class Game(object):
 
         # Main setup
         #!!! TEST - REMOVE
-        self.input.take_text(100)
+        self.text_input = TextInput(self)
+        self.text_input.enable(100)
         #!!! TEST - REMOVE
 
     # Main functions
@@ -67,8 +69,10 @@ class Game(object):
         self.screen.fill((0, 0, 0))
         self.console.draw()
         #!!! TEST - REMOVE
-        self.input.display_text(pygame.font.SysFont("Arial Black", 40, False, False),
-                                (255, 255, 255), (0, 0))
+        self.text_input.display(
+            pygame.font.SysFont("Arial Black", 40, False, False),
+            (255, 255, 255), (0, 0)
+        )
         #!!! TEST - REMOVE
 
     def quit(self):
@@ -193,10 +197,10 @@ class Game(object):
                 self.input.buttonup(event.button)
             elif event.type == pygame.KEYDOWN:
                 self.input.buttondown(event.key)
-                self.input.receive_single_characters(event)
+                TextInput.receive_single_characters(event)
             elif event.type == pygame.KEYUP:
                 self.input.buttonup(event.key)
-        self.input.receive_multiple_characters()
+        TextInput.receive_multiple_characters()
 
     def update(self):
         self.frame += 1
