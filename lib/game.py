@@ -90,8 +90,8 @@ class Game(object):
         """Takes 1 or more strings and concatenates them to create the error message."""
         def error_popup(error_info):
             text = "".join(("An error has occurred:\n\n    ",
-                         error_message, ".\n\n\n",
-                         error_info, "."))
+                            error_message, ".\n\n\n",
+                            error_info, "."))
             ctypes.windll.user32.MessageBoxA(0, text, "Error", 0)
 
         try:
