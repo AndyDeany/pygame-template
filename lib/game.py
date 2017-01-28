@@ -232,3 +232,4 @@ class Game(object):
             self.update()
 
         self.quit()
+
