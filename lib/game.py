@@ -122,23 +122,22 @@ class Game(object):
                 resolution = (self.width, self.height)
             flags = pygame.HWSURFACE | pygame.DOUBLEBUF
             if mode == "fullscreen":
-                flags = flags | pygame.FULLSCREEN
+                flags |= pygame.FULLSCREEN
             elif mode == "windowed":
                 # Positioning the window in the centre of the screen
-                os.environ['SDL_VIDEO_WINDOW_POS'] = "".join((
-                    str((self.system.MONITOR_WIDTH - resolution[0])/2), ",",
+                os.environ["SDL_VIDEO_WINDOW_POS"] = ",".join((
+                    str((self.system.MONITOR_WIDTH - resolution[0])/2),
                     str((self.system.MONITOR_HEIGHT - resolution[1])/2)
                     ))
             elif mode == "borderless":
-                os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
-                flags = flags | pygame.NOFRAME
+                os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
+                flags |= pygame.NOFRAME
             else:
-                raise ValueError("".join((
-                    "Unknown mode for reinitialise_screen(): \"", mode, "\""
-                    )))
+                raise ValueError("Unknown mode for reinitialise_screen(): \" %s \"" % mode)
 
             self.screen = pygame.display.set_mode(resolution, flags)
             self.width, self.height = resolution
+            self.mode = mode
         except Exception:
             self.log("Failed to reinitialise screen in ", mode, " mode "
                      "at ", self.width, "x", self.height, " resolution")
@@ -232,4 +231,3 @@ class Game(object):
             self.update()
 
         self.quit()
-
