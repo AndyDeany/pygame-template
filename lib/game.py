@@ -138,7 +138,7 @@ class Game(object):
                     )))
 
             self.screen = pygame.display.set_mode(resolution, flags)
-            self.width, self.height = resoution
+            self.width, self.height = resolution
         except Exception:
             self.log("Failed to reinitialise screen in ", mode, " mode "
                      "at ", self.width, "x", self.height, " resolution")
