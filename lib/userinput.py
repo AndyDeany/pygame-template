@@ -9,7 +9,8 @@ class Input(object):
         self.game = game
 
         self.mouse_pos = (0, 0)
-        self.buttons = {name: Button(self.game, number) for name, number in [
+        self.buttons = {name: Button(self.game, number) for name, number in (
+            ("default", 0),     # Any keys that only exist on select keyboards (e.g. volume/media buttons)
             # Mouse inputs
             ("leftmouse", 1), ("middlemouse", 2), ("rightmouse", 3),
 
@@ -53,13 +54,13 @@ class Input(object):
             ("f9", 290), ("f10", 291), ("f11", 292), ("f12", 293),
 
             # Key modifiers
-            ("numlock", 300), ("capslock", 301),
+            ("numlock", 300), ("capslock", 301), ("scrolllock", 302),
             ("rightshift", 303), ("leftshift", 304),
             ("rightctrl", 305), ("leftctrl", 306),
             ("altgr", 307), ("alt", 308),
 
-            ("leftwindows", 311), ("prntscr", 316)
-        ]}
+            ("leftwindows", 311), ("rightwindows", 312), ("prntscr", 316), ("menu", 319)
+        )}
 
     def reset(self):
         for button in self.buttons.values():
