@@ -114,7 +114,7 @@ class Game(object):
             error_popup("Please check log.txt for details")
             raise
 
-    def initialise_screen(self, resolution=None, mode="fullscreen"):
+    def initialise_screen(self, resolution=None, mode=None):
         """(Re)initialises the screen using the given arguments."""
         try:
             if resolution is None:
