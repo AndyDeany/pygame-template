@@ -119,6 +119,8 @@ class Game(object):
         try:
             if resolution is None:
                 resolution = (self.width, self.height)
+            if mode is None:
+                mode = self.mode
             flags = pygame.HWSURFACE | pygame.DOUBLEBUF
             if mode == "fullscreen":
                 flags |= pygame.FULLSCREEN
