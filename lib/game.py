@@ -23,8 +23,8 @@ from system import System
 from helper import Helper
 from console import Console
 from userinput import Input
-from text_input import TextInput
 from hotkey import Hotkey
+from text_input import TextInput
 # Main
 # from [file] import [class]
 
