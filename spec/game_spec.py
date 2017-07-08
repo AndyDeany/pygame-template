@@ -14,17 +14,19 @@ with description("Game"):
             return os.path.join(os.getcwd(), *path_elements)
 
         with it("should give a path to a given file in the root directory"):
-            expect(game.path_to("file.txt")).to(equal(joined_path_to("file.txt")))
+            expected_path = joined_path_to("file.txt")
+            expect(game.path_to("file.txt")).to(equal(expected_path))
 
         with it("should give a path to a file embedded in further folders"):
-            expect(game.path_to("folder/file.txt")).to(equal(joined_path_to("folder", "file.txt")))
+            expected_path = joined_path_to("folder", "file.txt")
+            expect(game.path_to("folder/file.txt")).to(equal(expected_path))
 
         with it("should load a file when given it's location using multiple arguments"):
-            expect(game.path_to("folder", "file.txt")).to(equal(joined_path_to("folder", "file.txt")))
+            expected_path = joined_path_to("folder", "file.txt")
+            expect(game.path_to("folder", "file.txt")).to(equal(expected_path))
 
-            expect(game.path_to("folder/deeper_folder", "file.txt")).to(equal(
-                joined_path_to("folder", "deeper_folder", "file.txt")
-            ))
+            expected_path = joined_path_to("folder", "deeper_folder", "file.txt")
+            expect(game.path_to("folder/deeper_folder", "file.txt")).to(equal(expected_path))
 
     with context(".log()"):
         pass
