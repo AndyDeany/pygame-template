@@ -7,7 +7,7 @@ with description("Game"):
     with it("should initialise correctly"):
         pass
 
-    with context("path_to"):
+    with context(".path_to()"):
         global joined_path_to
 
         def joined_path_to(*path_elements):
@@ -26,34 +26,34 @@ with description("Game"):
                 joined_path_to("folder", "deeper_folder", "file.txt")
             ))
 
-    with context("log"):
+    with context(".log()"):
         pass
 
-    with context("initialise_screen"):
+    with context(".initialise_screen()"):
         pass
 
-    with context("load_image"):
+    with context(".load_image()"):
         pass
 
-    with context("load_font"):
+    with context(".load_font()"):
         pass
 
-    with context("display"):
+    with context(".display()"):
         pass
 
-    with context("inputs"):
+    with context(".inputs()"):
         pass
 
-    with context("update"):
+    with context(".update()"):
         pass
 
-    with context("runtime"):
+    with context(".runtime()"):
         pass
 
-    with context("check_quit"):
+    with context(".check_quit()"):
         pass
 
-    with context("run"):
+    with context(".run()"):
         pass
 
 
