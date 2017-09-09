@@ -1,4 +1,4 @@
-from spec.spec_helper import *
+from spec.helper import *
 
 import os
 
@@ -57,6 +57,3 @@ with description("Game"):
 
     with context(".run()"):
         pass
-
-
-
