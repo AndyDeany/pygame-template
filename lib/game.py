@@ -1,15 +1,10 @@
-# Built-in modules
-# Base
 import os
 import sys
 import ctypes
 import traceback
 import datetime
 import time
-# Main
-# import [module]
 
-# Pygame
 import pygame
 try:
     import pygame._view     # sometimes necessary. If it isn't this will cause an error
@@ -18,8 +13,6 @@ try:
 except ImportError:
     pass
 
-# User defined modules
-# Base
 from caught_fatal_exception import CaughtFatalException
 from system import System
 from helper import Helper
@@ -27,13 +20,10 @@ from console import Console
 from userinput import Input
 from hotkey import Hotkey
 from text_input import TextInput
-# Main
-# from [file] import [class]
 
 
 class Game(object):
     def __init__(self, resolution, mode="windowed"):
-        # Base setup
         self.directory = os.getcwd()
 
         try:
@@ -58,32 +48,15 @@ class Game(object):
 
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed
 
-        # Main setup
-        #!!! TEST - REMOVE
-        self.text_input = TextInput(self)
-        self.text_input.enable(100)
-        #!!! TEST - REMOVE
-
-    # Main functions
     def logic(self):
-        self.check_quit()
-        self.console.logic()
+        raise NotImplementedError
 
     def draw(self):
-        self.screen.fill((0, 0, 0))
-        self.console.draw()
-        #!!! TEST - REMOVE
-        self.text_input.display(
-            pygame.font.SysFont("Arial Black", 40, False, False),
-            (255, 255, 255), (0, 0)
-        )
-        #!!! TEST - REMOVE
+        raise NotImplementedError
 
     def quit(self):
-        #! Add code for autosaving the game here
-        pygame.quit()
+        raise NotImplementedError
 
-    # Base functions
     def path_to(self, *path):
         """Returns the complete absolute path of the path given."""
         return os.path.join(self.directory, *"/".join(path).split("/"))
@@ -108,7 +81,7 @@ class Game(object):
             ctypes.windll.user32.MessageBoxA(0, text, "Error", 0)   # Error popup
             raise CaughtFatalException(sys.exc_info()[1])
         else:
-            pass #! Add some code here to show an error message in game
+            pass    #! Add some code here to show an error message in game
 
     def initialise_screen(self, resolution=None, mode=None):
         """(Re)initialises the screen using the given arguments."""
