@@ -1,6 +1,6 @@
 from expects import *
 
-from lib.game import Game
+from pygametemplate import Game
 
 import datetime
 
