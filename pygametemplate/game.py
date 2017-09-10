@@ -13,7 +13,7 @@ try:
 except ImportError:
     pass
 
-from caught_fatal_exception import CaughtFatalException
+from pygametemplate.exceptions import CaughtFatalException
 from system import System
 from helper import Helper
 from console import Console
