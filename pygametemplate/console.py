@@ -1,4 +1,4 @@
-from hotkey import Hotkey
+from pygametemplate.hotkey import Hotkey
 
 class Console(object):
     def __init__(self, game):

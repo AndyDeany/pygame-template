@@ -14,12 +14,12 @@ except ImportError:
     pass
 
 from pygametemplate.exceptions import CaughtFatalException
-from system import System
-from helper import Helper
-from console import Console
-from userinput import Input
-from hotkey import Hotkey
-from text_input import TextInput
+from pygametemplate.system import System
+from pygametemplate.helper import Helper
+from pygametemplate.console import Console
+from pygametemplate.userinput import Input
+from pygametemplate.hotkey import Hotkey
+from pygametemplate.text_input import TextInput
 
 
 class Game(object):

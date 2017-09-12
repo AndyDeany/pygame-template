@@ -1,6 +1,6 @@
 from collections import deque
 
-from hotkey import Hotkey
+from pygametemplate.hotkey import Hotkey
 
 class TextInput(object):
     class_assets_loaded = False
