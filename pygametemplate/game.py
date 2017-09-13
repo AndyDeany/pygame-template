@@ -26,6 +26,8 @@ class Game(object):
     def __init__(self, resolution, mode="windowed"):
         self.directory = os.getcwd()
 
+        os.environ["SDL_VIDEO_CENTERED"] = "1"
+
         try:
             pygame.init()
             self.pygame = pygame
@@ -49,13 +51,15 @@ class Game(object):
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed
 
     def logic(self):
-        raise NotImplementedError
+        self.check_quit()
+        self.console.logic()
 
     def draw(self):
-        raise NotImplementedError
+        self.screen.fill((0, 0, 0))
+        self.console.draw()
 
     def quit(self):
-        raise NotImplementedError
+        pygame.quit()
 
     def path_to(self, *path):
         """Returns the complete absolute path of the path given."""
