@@ -29,8 +29,6 @@ class Game(object):
     def __init__(self, resolution, mode="windowed"):
         self.directory = os.getcwd()
 
-        os.environ["SDL_VIDEO_CENTERED"] = "1"
-
         try:
             pygame.init()
             self.pygame = pygame
@@ -101,11 +99,7 @@ class Game(object):
             if mode == "fullscreen":
                 flags |= pygame.FULLSCREEN
             elif mode == "windowed":
-                # Positioning the window in the centre of the screen
-                os.environ["SDL_VIDEO_WINDOW_POS"] = ",".join((
-                    str((self.system.MONITOR_WIDTH - resolution[0])/2),
-                    str((self.system.MONITOR_HEIGHT - resolution[1])/2)
-                    ))
+                os.environ["SDL_VIDEO_CENTERED"] = "1"
             elif mode == "borderless":
                 os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
                 flags |= pygame.NOFRAME
