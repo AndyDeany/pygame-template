@@ -64,9 +64,9 @@ class Game(object):
         self.check_quit()
         self.console.logic()
         self.logic()
-        self.screen.fill((0, 0, 0))
 
     def _draw(self):
+        self.screen.fill((0, 0, 0))
         self.draw()
         self.console.draw()
 
