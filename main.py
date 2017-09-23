@@ -4,14 +4,14 @@ from __future__ import absolute_import
 import datetime
 import traceback
 
-from pygametemplate import Game
+from example_game import ExampleGame
 from pygametemplate.exceptions import CaughtFatalException
 
 if __name__ == "__main__":
     #! Decide how the window should be when the game opens. (fullscreen/borderless/windowed)?
     # How big should it be? User's monitor dimensions? Something else?
     try:
-        game = Game((1280, 720))
+        game = ExampleGame((1280, 720))
     except Exception:
         with open("log.txt", "a") as error_log:
             error_log.write("%s - UNCAUGHT FATAL EXCEPTION\n" % datetime.datetime.utcnow())
