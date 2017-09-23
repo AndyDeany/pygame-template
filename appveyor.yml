@@ -5,10 +5,13 @@ environment:
 install:
 - cmd: >-
     pip install -r requirements.txt
+
     pip install codacy-coverage
 build: off
 test_script:
 - cmd: >- 
     mamba --format documentation --enable-coverage
+
     coverage xml
+
     python-codacy-coverage -r coverage.xml
