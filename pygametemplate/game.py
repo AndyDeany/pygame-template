@@ -52,14 +52,26 @@ class Game(object):
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed
 
     def logic(self):
-        self.check_quit()
-        self.console.logic()
+        raise NotImplementedError
 
     def draw(self):
-        self.screen.fill((0, 0, 0))
-        self.console.draw()
+        raise NotImplementedError
 
     def quit(self):
+        raise NotImplementedError
+
+    def _logic(self):
+        self.check_quit()
+        self.console.logic()
+        self.logic()
+        self.screen.fill((0, 0, 0))
+
+    def _draw(self):
+        self.draw()
+        self.console.draw()
+
+    def _quit(self):
+        self.quit()
         pygame.quit()
 
     def path_to(self, *path):
@@ -197,8 +209,8 @@ class Game(object):
 
         while self.running:
             self.inputs()
-            self.logic()
-            self.draw()
+            self._logic()
+            self._draw()
             self.update()
 
-        self.quit()
+        self._quit()
