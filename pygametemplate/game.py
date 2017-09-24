@@ -1,3 +1,6 @@
+from __future__ import absolute_import
+
+
 import os
 import sys
 import ctypes
@@ -13,13 +16,13 @@ try:
 except ImportError:
     pass
 
-from caught_fatal_exception import CaughtFatalException
-from system import System
-from helper import Helper
-from console import Console
-from userinput import Input
-from hotkey import Hotkey
-from text_input import TextInput
+from pygametemplate.exceptions import CaughtFatalException
+from pygametemplate.system import System
+from pygametemplate.helper import Helper
+from pygametemplate.console import Console
+from pygametemplate.userinput import Input
+from pygametemplate.hotkey import Hotkey
+from pygametemplate.text_input import TextInput
 
 
 class Game(object):
@@ -56,6 +59,20 @@ class Game(object):
 
     def quit(self):
         raise NotImplementedError
+
+    def _logic(self):
+        self.check_quit()
+        self.console.logic()
+        self.logic()
+
+    def _draw(self):
+        self.screen.fill((0, 0, 0))
+        self.draw()
+        self.console.draw()
+
+    def _quit(self):
+        self.quit()
+        pygame.quit()
 
     def path_to(self, *path):
         """Returns the complete absolute path of the path given."""
@@ -94,11 +111,7 @@ class Game(object):
             if mode == "fullscreen":
                 flags |= pygame.FULLSCREEN
             elif mode == "windowed":
-                # Positioning the window in the centre of the screen
-                os.environ["SDL_VIDEO_WINDOW_POS"] = ",".join((
-                    str((self.system.MONITOR_WIDTH - resolution[0])/2),
-                    str((self.system.MONITOR_HEIGHT - resolution[1])/2)
-                    ))
+                os.environ["SDL_VIDEO_CENTERED"] = "1"
             elif mode == "borderless":
                 os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
                 flags |= pygame.NOFRAME
@@ -196,8 +209,8 @@ class Game(object):
 
         while self.running:
             self.inputs()
-            self.logic()
-            self.draw()
+            self._logic()
+            self._draw()
             self.update()
 
-        self.quit()
+        self._quit()

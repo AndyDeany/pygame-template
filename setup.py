@@ -10,7 +10,7 @@ setup(
     url="https://github.com/AndyDeany/pygame-template",
     author=pygametemplate.__author__,
     author_email="oneandydean@hotmail.com",
-    packages=["pygametemplate"],
+    packages=("pygametemplate",)
     install_requires=(
         "pygame==1.9.3"
     ),

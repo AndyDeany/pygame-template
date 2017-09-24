@@ -1,4 +1,7 @@
-from hotkey import Hotkey
+from __future__ import absolute_import
+
+
+from pygametemplate.hotkey import Hotkey
 
 class Console(object):
     def __init__(self, game):

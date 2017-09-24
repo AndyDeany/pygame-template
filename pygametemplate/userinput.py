@@ -1,4 +1,7 @@
-from button import Button
+from __future__ import absolute_import
+
+
+from pygametemplate.button import Button
 
 class Input(object):
     """
