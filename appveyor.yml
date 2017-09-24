@@ -5,10 +5,10 @@ environment:
     secure: ET1MxxGbElQhl8BnS8Aj0AYR7eEMCzJEGBYWDJqDOFvTqWt6txZ1stIBOx2k3F/l
 
 install:
-  - cmd: pip install -r requirements.txt
-  - cmd: pip install codacy-coverage
+  - pip install -r requirements.txt
+  - pip install codacy-coverage
 build: off
 test_script:
-  - cmd: mamba --format documentation --enable-coverage
-  - cmd: coverage xml
-  - cmd: python-codacy-coverage -r coverage.xml
+  - mamba --format documentation --enable-coverage
+  - coverage xml
+  - ./upload-codacy-coverage.bat
