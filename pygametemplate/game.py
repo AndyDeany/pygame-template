@@ -26,7 +26,7 @@ from pygametemplate.text_input import TextInput
 
 
 class Game(object):
-    def __init__(self, resolution=(1280, 720), mode="windowed"):
+    def __init__(self, StartingView, resolution=(1280, 720), mode="windowed"):
         self.directory = os.getcwd()
 
         try:
@@ -41,7 +41,9 @@ class Game(object):
         pygame.display.set_caption("insertnamehere (Alpha 1.0)")
         #! pygame.display.set_icon(self.load_image("icon_name", file_extension=".ico"))
 
-        self.current = "main menu"
+        self.last_view = None
+        self.current_view = StartingView(self)
+
         self.fps = 60
         self.frame = 0  # The current frame the game is on (since the game was opened)
 
@@ -50,6 +52,12 @@ class Game(object):
         self.console = Console(self)
 
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed
+
+    def set_view(self, View):
+        """Set the current view to the given View class."""
+        self.last_view = self.current_view
+        self.last_view.unload()
+        self.current_view = View(self)
 
     def logic(self):
         raise NotImplementedError
@@ -63,10 +71,12 @@ class Game(object):
     def _logic(self):
         self._check_quit()
         self.console.logic()
+        self.current_view.logic()
         self.logic()
 
     def _draw(self):
         self.screen.fill((0, 0, 0))
+        self.current_view.draw()
         self.draw()
         self.console.draw()
 
