@@ -2,9 +2,6 @@
 
 ## Minor
 
-* Add `toggle_fps_hotkey=Hotkey(self.game, "f", ctrl=True)`
-as an argument of the `Console` class's `__init__()` method.
-
 * Add `pygametemplate.additional` module with `DebugConsole` class.
 
 * Change `helper.Helper` to be a module instead of a class.
