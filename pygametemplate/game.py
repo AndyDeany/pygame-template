@@ -61,7 +61,7 @@ class Game(object):
         raise NotImplementedError
 
     def _logic(self):
-        self.check_quit()
+        self._check_quit()
         self.console.logic()
         self.logic()
 
@@ -163,7 +163,7 @@ class Game(object):
         except Exception:
             self.log("Failed to display image at ", coordinates)
 
-    def inputs(self):
+    def _inputs(self):
         self.input.reset()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -181,7 +181,7 @@ class Game(object):
                 self.input.buttonup(event.key)
         TextInput.receive_multiple_characters()
 
-    def update(self):
+    def _update(self):
         self.frame += 1
         try:
             pygame.display.flip()   # Updating the screen
@@ -195,7 +195,7 @@ class Game(object):
         except Exception:
             self.log("Failed to calculate and return game run time")
 
-    def check_quit(self):
+    def _check_quit(self):
         if self.quit_condition():
             self.running = False
 
@@ -208,9 +208,9 @@ class Game(object):
             self.log("Failed to initialise essential time related display variables")
 
         while self.running:
-            self.inputs()
+            self._inputs()
             self._logic()
             self._draw()
-            self.update()
+            self._update()
 
         self._quit()
