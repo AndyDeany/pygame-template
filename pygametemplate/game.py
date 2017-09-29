@@ -26,7 +26,7 @@ from pygametemplate.text_input import TextInput
 
 
 class Game(object):
-    def __init__(self, resolution, mode="windowed"):
+    def __init__(self, resolution=(1280, 720), mode="windowed"):
         self.directory = os.getcwd()
 
         try:

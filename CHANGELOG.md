@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+* Add 1280x720 as the default window resolution if one isn't passed in.
+
 ## 0.2.0
 
 * Add Python 3 support.
