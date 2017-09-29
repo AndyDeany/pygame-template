@@ -7,7 +7,7 @@ as an argument of the `Console` class's `__init__()` method.
 
 * Add `pygametemplate.additional` module with `DebugConsole` class.
 
-* Change `helper.Helper` to be a module instead of a class`.
+* Change `helper.Helper` to be a module instead of a class.
 
 * Move methods of `Game` which don't affect it's state to a module
 so that game doesn't need to be passed around? Like file loading maybe.
