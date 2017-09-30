@@ -26,7 +26,7 @@ from pygametemplate.text_input import TextInput
 
 
 class Game(object):
-    def __init__(self, resolution, mode="windowed"):
+    def __init__(self, StartingView, resolution=(1280, 720), mode="windowed"):
         self.directory = os.getcwd()
 
         try:
@@ -41,7 +41,9 @@ class Game(object):
         pygame.display.set_caption("insertnamehere (Alpha 1.0)")
         #! pygame.display.set_icon(self.load_image("icon_name", file_extension=".ico"))
 
-        self.current = "main menu"
+        self.last_view = None
+        self.current_view = StartingView(self)
+
         self.fps = 60
         self.frame = 0  # The current frame the game is on (since the game was opened)
 
@@ -50,6 +52,12 @@ class Game(object):
         self.console = Console(self)
 
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed
+
+    def set_view(self, View):
+        """Set the current view to the given View class."""
+        self.last_view = self.current_view
+        self.last_view.unload()
+        self.current_view = View(self)
 
     def logic(self):
         raise NotImplementedError
@@ -61,12 +69,14 @@ class Game(object):
         raise NotImplementedError
 
     def _logic(self):
-        self.check_quit()
+        self._check_quit()
         self.console.logic()
+        self.current_view.logic()
         self.logic()
 
     def _draw(self):
         self.screen.fill((0, 0, 0))
+        self.current_view.draw()
         self.draw()
         self.console.draw()
 
@@ -163,7 +173,7 @@ class Game(object):
         except Exception:
             self.log("Failed to display image at ", coordinates)
 
-    def inputs(self):
+    def _inputs(self):
         self.input.reset()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -181,7 +191,7 @@ class Game(object):
                 self.input.buttonup(event.key)
         TextInput.receive_multiple_characters()
 
-    def update(self):
+    def _update(self):
         self.frame += 1
         try:
             pygame.display.flip()   # Updating the screen
@@ -195,7 +205,7 @@ class Game(object):
         except Exception:
             self.log("Failed to calculate and return game run time")
 
-    def check_quit(self):
+    def _check_quit(self):
         if self.quit_condition():
             self.running = False
 
@@ -208,9 +218,9 @@ class Game(object):
             self.log("Failed to initialise essential time related display variables")
 
         while self.running:
-            self.inputs()
+            self._inputs()
             self._logic()
             self._draw()
-            self.update()
+            self._update()
 
         self._quit()
