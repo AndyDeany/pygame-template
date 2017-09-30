@@ -2,10 +2,6 @@ from __future__ import absolute_import
 
 
 import os
-import sys
-import ctypes
-import traceback
-import datetime
 import time
 
 import pygame
@@ -16,7 +12,7 @@ try:
 except ImportError:
     pass
 
-from pygametemplate.exceptions import CaughtFatalException
+from pygametemplate import log
 from pygametemplate.system import System
 from pygametemplate.helper import Helper
 from pygametemplate.console import Console
@@ -27,13 +23,11 @@ from pygametemplate.text_input import TextInput
 
 class Game(object):
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed"):
-        self.directory = os.getcwd()
-
         try:
             pygame.init()
             self.pygame = pygame
         except Exception:
-            self.log("Failed to initialise pygame")
+            log("Failed to initialise pygame")
         self.system = System(self)
         self.width, self.height = resolution
         self.mode = mode
@@ -84,31 +78,6 @@ class Game(object):
         self.quit()
         pygame.quit()
 
-    def path_to(self, *path):
-        """Returns the complete absolute path of the path given."""
-        return os.path.join(self.directory, *"/".join(path).split("/"))
-
-    def log(self, *error_message, fatal=True):
-        """Takes 1 or more variables and concatenates them to create the error message."""
-        error_message = "".join(map(str, error_message))
-        try:
-            with open(self.path_to("log.txt"), "a") as error_log:
-                error_log.write("%s - %s.\n" % (datetime.datetime.utcnow(), error_message))
-                error_log.write(traceback.format_exc() + "\n")
-        except Exception:
-            error_info = "This error occurred very early during game initialisation and could not be logged"
-        else:
-            error_info = "Please check log.txt for details"
-
-        if fatal:
-            text = "".join(("An error has occurred:\n\n    ",
-                            error_message, ".\n\n\n",
-                            error_info, "."))
-            ctypes.windll.user32.MessageBoxA(0, text, "Error", 0)   # Error popup
-            raise CaughtFatalException(sys.exc_info()[1])
-        else:
-            pass    #! Add some code here to show an error message in game
-
     def initialise_screen(self, resolution=None, mode=None):
         """(Re)initialises the screen using the given arguments."""
         try:
@@ -131,7 +100,7 @@ class Game(object):
             self.width, self.height = resolution
             self.mode = mode
         except Exception:
-            self.log("Failed to reinitialise screen in ", mode, " mode "
+            log("Failed to reinitialise screen in ", mode, " mode "
                      "at ", self.width, "x", self.height, " resolution")
 
     # Asset loading
@@ -149,7 +118,7 @@ class Game(object):
                     self.path_to("assets/images", image_name + file_extension)
                     ).convert()
         except Exception:
-            self.log("Failed to load image: ", image_name, file_extension)
+            log("Failed to load image: ", image_name, file_extension)
 
     def load_font(self, font_name, font_size, file_extension=".ttf"):
         try:
@@ -157,7 +126,7 @@ class Game(object):
                 self.path_to("assets/fonts", font_name + file_extension), font_size
                 )
         except Exception:
-            self.log("Failed to load font: ", font_name, file_extension)
+            log("Failed to load font: ", font_name, file_extension)
 
     def display(self, image, coordinates, area=None, special_flags=0):
         """Takes coordinates and area for a 1920x1080 window"""
@@ -170,7 +139,7 @@ class Game(object):
                         area[2]*x_scale, area[3]*y_scale)
             self.screen.blit(image, coordinates, area, special_flags)
         except Exception:
-            self.log("Failed to display image at ", coordinates)
+            log("Failed to display image at ", coordinates)
 
     def _inputs(self):
         self.input.reset()
@@ -196,13 +165,13 @@ class Game(object):
             pygame.display.flip()   # Updating the screen
             self.clock.tick(self.fps)    # [fps] times per second
         except Exception:
-            self.log("Failed to update screen")
+            log("Failed to update screen")
 
     def runtime(self):
         try:
             return time.time() - self.start_time
         except Exception:
-            self.log("Failed to calculate and return game run time")
+            log("Failed to calculate and return game run time")
 
     def _check_quit(self):
         if self.quit_condition():
@@ -214,7 +183,7 @@ class Game(object):
             self.clock = pygame.time.Clock()
             self.start_time = time.time()
         except Exception:
-            self.log("Failed to initialise essential time related display variables")
+            log("Failed to initialise essential time related display variables")
 
         while self.running:
             self._inputs()

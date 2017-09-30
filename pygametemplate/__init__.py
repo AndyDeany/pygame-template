@@ -11,5 +11,6 @@ __author__ = "Andrew Dean"
 __author_email__ = "oneandydean@hotmail.com"
 
 
+from pygametemplate.core import log
 from pygametemplate.game import Game
 from pygametemplate.view import View
