@@ -12,7 +12,7 @@ setup(
     author_email="oneandydean@hotmail.com",
     packages=("pygametemplate",)
     install_requires=(
-        "pygame==1.9.3"
+        "pygame>=1.9.3"
     ),
     classifiers=(
         "Development Status :: 2 - Pre-Alpha",
