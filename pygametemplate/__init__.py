@@ -9,3 +9,4 @@ __author__ = "Andrew Dean"
 
 
 from pygametemplate.game import Game
+from pygametemplate.view import View
