@@ -88,9 +88,8 @@ class Game(object):
         """Returns the complete absolute path of the path given."""
         return os.path.join(self.directory, *"/".join(path).split("/"))
 
-    def log(self, *error_message, **options):
+    def log(self, *error_message, fatal=True):
         """Takes 1 or more variables and concatenates them to create the error message."""
-        fatal = options.get("fatal", True)  # `fatal` option defaults to True
         error_message = "".join(map(str, error_message))
         try:
             with open(self.path_to("log.txt"), "a") as error_log:
