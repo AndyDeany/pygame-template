@@ -12,8 +12,6 @@ so that game doesn't need to be passed around? Like file loading maybe.
 * `Image` class with `Image.display(pygame.Surface())` method,
 along with loading and unloading from RAM.
 
-* `View` classes. `Game` needs a `set_view(View())` method.
-
 * Remove silly `try/except` blocks.
 
 ## Major

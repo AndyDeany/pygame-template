@@ -2,6 +2,25 @@
 
 ## 0.3.0
 
+* Add the concept of "views" to pygametemplate.
+`View`s are classes which represent a "section" of your game.
+Every view should inherit from `pygametemplate.View`.
+All `View`s have a `self.game` member for accessing the main `Game` instance.
+To switch to the next view in your game, you can call `self.game.set_view(NextViewClass)`.
+`View` classes are expected to implement the following methods:
+
+    * `View.load(self)`: load all the assets/other things needed for the view to work.
+    This means you only load images (for example) into RAM when you need them.
+
+    * `View.unload(self)`: unload assets that were used by the view,
+    but aren't needed after the view is no longer the current view.
+    Should mostly do the opposite of what `View.load()` does.
+
+    * `View.logic(self)`: run the logic for the view.
+
+    * `View.draw(self)`: run all drawing code for the view.
+
+
 * Change `_inputs()`, `_update()` and `_check_quit()` to be "private" methods
 of the `Game` class by prepending an underscore to their names.
 
