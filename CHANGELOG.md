@@ -2,7 +2,8 @@
 
 ## 0.3.0
 
-* Add the concept of "views" to pygametemplate.
+* [**Backwards incompatible change**]<br>
+Add the concept of "views" to pygametemplate.
 `View`s are classes which represent a "section" of your game.
 Every view should inherit from `pygametemplate.View`.
 All `View`s have a `self.game` member for accessing the main `Game` instance.
@@ -33,5 +34,6 @@ of the `Game` class by prepending an underscore to their names.
 
 * Add Python 3 support.
 
-* Create the `pygametemplate.exceptions` module and move `CaughtFatalException` there.
+* [**Backwards incompatible change**]<br>
+Create the `pygametemplate.exceptions` module and move `CaughtFatalException` there.
 This module will contain all exceptions added from now on.
