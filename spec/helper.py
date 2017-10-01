@@ -1,9 +1,5 @@
-from expects import *
-
-from example_view import ExampleView
 from pygametemplate import Game
-
-import datetime
+from example_view import ExampleView
 
 
 class TestGame(Game):

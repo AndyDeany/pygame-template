@@ -1,5 +1,6 @@
 """File containing unit tests for the pygametemplate.Game class."""
-from spec.helper import *
+from expects import *
+from spec.helper import game
 
 
 with description("Game"):
