@@ -14,10 +14,10 @@ with description("Game"):
     with context(".display()"):
         pass
 
-    with context(".inputs()"):
+    with context("._inputs()"):
         pass
 
-    with context(".update()"):
+    with context("._update()"):
         pass
 
     with context(".runtime()"):
