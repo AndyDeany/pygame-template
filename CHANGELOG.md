@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1
+
+* Add missing `pygame` import in the `pygametemplate.core` module which
+was causing the `load_image()` and `load_font()` functions to throw an error.
+
 ## 0.4.0
 
 * [**Backwards incompatible change**]<br>
