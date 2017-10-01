@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 __url__ = "https://github.com/AndyDeany/pygame-template"
 __download_url__ = "{}/archive/v{}.tar.gz".format(__url__, __version__)
