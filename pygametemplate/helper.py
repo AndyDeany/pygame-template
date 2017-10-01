@@ -1,3 +1,6 @@
+from pygametemplate import log
+
+
 class Helper(object):
     """Class holding helper functions."""
     def __init__(self, game):
@@ -10,7 +13,7 @@ class Helper(object):
                 calling_class = calling_object.__class__
                 setattr(calling_class, attribute_name, assets_dict[attribute_name])
         except Exception:
-            self.game.log("Failed to load ", calling_class.__name__, " class assets")
+            log("Failed to load ", calling_class.__name__, " class assets")
         setattr(calling_class, "class_assets_loaded", True)
 
     def wrap_text(self, text, font, max_width):
@@ -51,5 +54,5 @@ class Helper(object):
             return sum(map(wrap_paragraph, paragraphs), [])
         except Exception as error:
             fatal = not isinstance(error, ValueError)
-            self.game.log("Failed to wrap text: \"", text, "\"", fatal=fatal)
+            log("Failed to wrap text: \"", text, "\"", fatal=fatal)
             return ["error"]

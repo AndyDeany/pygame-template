@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 
-
+from pygametemplate import log
 from pygametemplate.button import Button
+
 
 class Input(object):
     """
@@ -79,14 +80,14 @@ class Input(object):
             button.press()
             button.event = event
         except Exception:
-            self.game.log("Failed to process a button being pressed"
-                          "[event number=", number, "]")
+            log("Failed to process a button being pressed "
+                "[event number=", number, "]")
 
     def buttonup(self, number):
         try:
             next((button for button in self.buttons.values() if button.number == number)).release()
         except Exception:
-            self.game.log("Failed to process a button being released [event number=", number, "]")
+            log("Failed to process a button being released [event number=", number, "]")
 
     def mousein(self, x, y, width, height):
         """Determines if the mouse is in the given rectangle."""
@@ -94,5 +95,5 @@ class Input(object):
             return (x < self.mouse_pos[0] < x + width and
                     y < self.mouse_pos[1] < y + height)
         except Exception:
-            self.game.log("Unable to determine whether mouse position meet the requirements ",
-                          x, " < x < ", x + width, ", ", y, " < y <  ", y + height)
+            log("Unable to determine whether mouse position meet the requirements ",
+                x, " < x < ", x + width, ", ", y, " < y <  ", y + height)

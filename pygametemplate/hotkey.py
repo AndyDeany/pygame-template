@@ -1,3 +1,6 @@
+from pygametemplate import log
+
+
 class Hotkey(object):
     def __init__(self, game, button_name, ctrl=False, shift=False, alt=False):
         self.game = game
@@ -8,7 +11,7 @@ class Hotkey(object):
             self.shift = shift
             self.alt = alt
         except Exception:
-            self.game.log("Failed to initialise hotkey object")
+            log("Failed to initialise hotkey object")
 
     def pressed(self):
         """Returns True if the hotkey was just pressed."""

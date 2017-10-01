@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 
-
+from pygametemplate import log
 from pygametemplate.hotkey import Hotkey
+
 
 class Console(object):
 
@@ -24,7 +25,7 @@ class Console(object):
                 "toggle fps": (toggle_fps_hotkey.pressed, self.toggle_fps)
             }
         except Exception:
-            self.game.log("Failed to initialise console object")
+            log("Failed to initialise console object")
 
     def logic(self):
         for condition, function in self.hotkeys.values():
@@ -45,4 +46,4 @@ class Console(object):
                 True, self.text_colour
                 ), self.fps_coordinates)
         except Exception:
-            self.game.log("Failed to display FPS")
+            log("Failed to display FPS")
