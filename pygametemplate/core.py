@@ -51,7 +51,7 @@ def load_image(image_name, fade_enabled=False, file_extension=".png"):
         try:
             image = pygame.image.load(image_path)
         except pygame.error:
-            raise FileNotFoundError
+            raise IOError
         if not fade_enabled:
             return image.convert_alpha()  # Fixes per pixel alphas permanently
         else:

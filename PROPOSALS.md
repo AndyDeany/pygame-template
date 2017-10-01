@@ -11,4 +11,5 @@ along with loading and unloading from RAM.
 
 ## Major
 
-* Remove Python 2 support
+* Remove Python 2 support.
+    * Change `IOError`s `FileNotFoundError` (most of them, at least).

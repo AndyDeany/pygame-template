@@ -35,7 +35,7 @@ with description("pygametemplate.core"):
     with context(".log()"):
         try:
             os.remove("log.txt")    # Clean starting environment
-        except FileNotFoundError:
+        except Exception:   # TODO: Change to FileNotFoundError (python3 only)
             pass
 
         with it("should log a non-fatal error correctly"):
@@ -86,7 +86,7 @@ with description("pygametemplate.core"):
             check_images_equal(image, expected_image)
 
         with it("should raise an error when trying to load an image that doesn't exist"):
-            expect(lambda: load_image("non_existant")).to(raise_error(FileNotFoundError))
+            expect(lambda: load_image("non_existant")).to(raise_error(IOError))
 
     with context(".load_font()"):
         pass
