@@ -1,3 +1,6 @@
+from pygametemplate import log
+
+
 class System(object):
     def __init__(self, game):
         self.game = game
@@ -6,4 +9,4 @@ class System(object):
             self.MONITOR_WIDTH = display_info.current_w
             self.MONITOR_HEIGHT = display_info.current_h
         except Exception:
-            self.game.log("Failed to initialise system object")
+            log("Failed to initialise system object")

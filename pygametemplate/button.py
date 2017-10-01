@@ -1,5 +1,8 @@
 import time
 
+from pygametemplate import log
+
+
 class Button(object):
     """Class representing keyboard keys."""
     def __init__(self, game, number):
@@ -13,7 +16,7 @@ class Button(object):
             self.released = 0   # If the button was just released
             self.press_time = 0.0
         except Exception:
-            self.game.log("Failed to initialise button variable")
+            log("Failed to initialise button variable")
 
     def press(self):
         self.pressed = 1
@@ -29,7 +32,7 @@ class Button(object):
             self.pressed = 0
             self.released = 0
         except Exception:
-            self.game.log("Failed to reset button")
+            log("Failed to reset button")
 
     def time_held(self):
         try:
@@ -38,4 +41,4 @@ class Button(object):
             else:
                 return 0.0
         except Exception:
-            self.game.log("Failed to get button held time")
+            log("Failed to get button held time")

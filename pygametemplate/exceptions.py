@@ -1,3 +1,3 @@
 class CaughtFatalException(Exception):
-    """Raised by Game.log() when it catches a fatal exception."""
+    """Raised by pygametemplate.core.log() when it catches a fatal exception."""
     pass

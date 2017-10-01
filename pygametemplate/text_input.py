@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
-
 from collections import deque
 
+from pygametemplate import log
+from pygametemplate.helper import load_class_assets
 from pygametemplate.hotkey import Hotkey
+
 
 class TextInput(object):
     class_assets_loaded = False
@@ -33,9 +35,7 @@ class TextInput(object):
         self.instances.append(self)
 
     def load_class_assets(self, game):
-        game.helper.load_class_assets(self, {
-            "game": game
-        })
+        load_class_assets(self, {"game": game})
 
     def destroy(self):
         self.instances.remove(self)
@@ -87,7 +87,7 @@ class TextInput(object):
                      coordinates[1])
                 )
         except Exception:
-            self.game.log("Failed to display text input")
+            log("Failed to display text input")
 
     def check_focused(self, x, y, width, height):
         """
@@ -189,8 +189,8 @@ class TextInput(object):
                     elif len(active_instance.text) < active_instance.max_characters:
                         active_instance.insert_character(event.unicode)
             except Exception:
-                active_instance.game.log("Failed to receive input from a key press"
-                                         "[event.key = ", event.key, "]")
+                log("Failed to receive input from a key press"
+                    "[event.key = ", event.key, "]")
 
     character_keys = (  # Keys that alter the appearance of self.text when it is displayed
         [n for n in range(44, 58)]
@@ -209,7 +209,7 @@ class TextInput(object):
                     if button.time_held() > 0.5:
                         self.receive_single_characters(button.event)
             except Exception:
-                self.game.log("Failed to receive text input from held keys")
+                log("Failed to receive text input from held keys")
 
     @classmethod
     def character_keys_held(self):

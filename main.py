@@ -6,6 +6,7 @@ import traceback
 
 from example_game import ExampleGame
 from example_view import ExampleView
+from pygametemplate import log
 from pygametemplate.exceptions import CaughtFatalException
 
 if __name__ == "__main__":
@@ -23,4 +24,4 @@ if __name__ == "__main__":
         except CaughtFatalException:
             pass
         except Exception: # Catches all exceptions that weren't caught in the rest of the code
-            game.log("UNCAUGHT FATAL EXCEPTION")
+            log("UNCAUGHT FATAL EXCEPTION")
