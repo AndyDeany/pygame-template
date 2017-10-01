@@ -12,7 +12,7 @@ try:
 except ImportError:
     pass
 
-from pygametemplate import log
+from pygametemplate import log, load_image
 from pygametemplate.system import System
 from pygametemplate.helper import Helper
 from pygametemplate.console import Console
@@ -33,7 +33,7 @@ class Game(object):
         self.mode = mode
         self.initialise_screen()
         pygame.display.set_caption("insertnamehere (Alpha 1.0)")
-        #! pygame.display.set_icon(self.load_image("icon_name", file_extension=".ico"))
+        #! pygame.display.set_icon(load_image("icon_name", file_extension=".ico"))
 
         self.last_view = None
         self.current_view = StartingView(self)
