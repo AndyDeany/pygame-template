@@ -4,7 +4,9 @@ import traceback
 from datetime import datetime
 
 from expects import *
+import pygame
 
+from spec.helper import game
 from pygametemplate.core import path_to, log, load_image, load_font
 
 
@@ -58,7 +60,33 @@ with description("pygametemplate.core"):
         #     pass
 
     with context(".load_image()"):
-        pass
+        global check_images_equal
+
+        def check_images_equal(img1, img2):
+            expect(type(img1)).to(equal(type(img2)))
+            expect(img1.get_size()).to(equal(img2.get_size()))
+            expect(img1.get_alpha()).to(equal(img2.get_alpha()))
+
+        with it("should load a .png image correctly"):
+            image = load_image("test")
+            test_png_path = path_to("assets/images/test.png")
+            expected_image = pygame.image.load(test_png_path).convert_alpha()
+            check_images_equal(image, expected_image)
+
+        with it("should load a .ico image correctly"):
+            image = load_image("test", file_extension=".ico")
+            test_ico_path = path_to("assets/images/test.ico")
+            expected_image = pygame.image.load(test_ico_path).convert_alpha()
+            check_images_equal(image, expected_image)
+
+        with it("should load a non-fixed-alpha .png image correctly"):
+            image = load_image("test", fade_enabled=True)
+            test_png_path = path_to("assets/images/test.png")
+            expected_image = pygame.image.load(test_png_path).convert()
+            check_images_equal(image, expected_image)
+
+        with it("should raise an error when trying to load an image that doesn't exist"):
+            expect(lambda: load_image("non_existant")).to(raise_error(FileNotFoundError))
 
     with context(".load_font()"):
         pass
