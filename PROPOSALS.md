@@ -9,6 +9,8 @@ along with loading and unloading from RAM.
 
 * Remove silly `try/except` blocks.
 
+* Create new `test_requirements.txt` file for test- qonly requirements.
+
 ## Major
 
 * Remove Python 2 support.
