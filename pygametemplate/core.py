@@ -1,9 +1,9 @@
 """Module containing the core functions of pygametemplate."""
 import os
 import sys
-import traceback as traceback
+import traceback
 from datetime import datetime
-import ctypes as ctypes
+from ctypes import windll
 
 from pygametemplate.exceptions import CaughtFatalException
 
@@ -28,7 +28,7 @@ def log(*error_message, fatal=True):
     if fatal:
         text = ("An error has occurred:\n\n    {}.\n\n\n"
                 "Please check log.txt for details.").format(error_message)
-        ctypes.windll.user32.MessageBoxA(0, text, "Error", 0)   # Error popup
+        windll.user32.MessageBoxW(0, text, "Error", 0)
         raise CaughtFatalException(sys.exc_info()[1])
     else:
         pass    # TODO: Add some code here to show an error message in game
