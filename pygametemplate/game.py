@@ -103,31 +103,6 @@ class Game(object):
             log("Failed to reinitialise screen in ", mode, " mode "
                      "at ", self.width, "x", self.height, " resolution")
 
-    # Asset loading
-    def load_image(self, image_name, fade_enabled=False, file_extension=".png"):
-        """fade_enabled should be True if you want images to be able to fade"""
-        try:
-            #! Add stuff for loading images of the correct resolution
-            # depending on the player's resolution settings
-            if not fade_enabled:
-                return pygame.image.load(
-                    self.path_to("assets/images", image_name + file_extension)
-                    ).convert_alpha()   # Fixes per pixel alphas permanently
-            else:
-                return pygame.image.load(
-                    self.path_to("assets/images", image_name + file_extension)
-                    ).convert()
-        except Exception:
-            log("Failed to load image: ", image_name, file_extension)
-
-    def load_font(self, font_name, font_size, file_extension=".ttf"):
-        try:
-            return pygame.font.Font(
-                self.path_to("assets/fonts", font_name + file_extension), font_size
-                )
-        except Exception:
-            log("Failed to load font: ", font_name, file_extension)
-
     def display(self, image, coordinates, area=None, special_flags=0):
         """Takes coordinates and area for a 1920x1080 window"""
         try:
