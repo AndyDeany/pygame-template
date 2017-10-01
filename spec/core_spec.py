@@ -50,7 +50,7 @@ with description("pygametemplate.core"):
             details = (time_logged, extended_error_message, expected_traceback)
             expected_logged_error = "{} - {}.\n{}\n".format(*details)
 
-            with open("log.txt", "r", encoding="utf-8") as log_file:
+            with open("log.txt", "r") as log_file:
                 expect(log_file.read()).to(equal(expected_logged_error))
 
             os.remove("log.txt")

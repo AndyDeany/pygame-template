@@ -26,7 +26,7 @@ def log(*error_message, **options):
     """Takes 1 or more variables and concatenates them to create the error message."""
     fatal = options.get("fatal", True)  # `fatal` option defaults to True
     error_message = "".join(map(str, error_message))
-    with open(LOG_FILE, "a", encoding="utf-8") as log_file:
+    with open(LOG_FILE, "a") as log_file:
         log_file.write("{} - {}.\n".format(datetime.utcnow(), error_message))
         log_file.write(traceback.format_exc() + "\n")
 

@@ -13,3 +13,4 @@ along with loading and unloading from RAM.
 
 * Remove Python 2 support.
     * Change `IOError`s `FileNotFoundError` (most of them, at least).
+    * Add `encoding="utf-8"` to `open()` calls.
