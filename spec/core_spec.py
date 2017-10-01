@@ -1,5 +1,7 @@
 """File containing unit tests for the pygametemplate.core module."""
 import os
+import traceback
+from datetime import datetime
 
 from expects import *
 
@@ -29,7 +31,31 @@ with description("pygametemplate.core"):
             expect(path_to("folder/deeper_folder", "file.txt")).to(equal(expected_path))
 
     with context(".log()"):
-        pass
+        try:
+            os.remove("log.txt")    # Clean starting environment
+        except FileNotFoundError:
+            pass
+
+        with it("should log a non-fatal error correctly"):
+            extended_error_message = "example extended error message"
+            try:
+                raise ValueError("example raised error message")
+            except ValueError:
+                log(extended_error_message, fatal=False)
+                time_logged = datetime.utcnow()
+                expected_traceback = traceback.format_exc()
+
+            details = (time_logged, extended_error_message, expected_traceback)
+            expected_logged_error = "{} - {}.\n{}\n".format(*details)
+
+            with open("log.txt", "r", encoding="utf-8") as log_file:
+                expect(log_file.read()).to(equal(expected_logged_error))
+
+            os.remove("log.txt")
+
+        # The below test is currently untestable properly.
+        # with it("should log a fatal error correctly"):
+        #     pass
 
     with context(".load_image()"):
         pass
