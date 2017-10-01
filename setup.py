@@ -11,7 +11,7 @@ setup(
     url="https://github.com/AndyDeany/pygame-template",
     download_url=pygametemplate.__download_url__,
     author=pygametemplate.__author__,
-    author_email=__author_email__,
+    author_email=pygametemplate.__author_email__,
     packages=(pygametemplate.__name__,),
     keywords=("pygame", "template", "gamedev"),
     install_requires=("pygame>=1.9.3",),
