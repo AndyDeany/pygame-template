@@ -47,14 +47,15 @@ def load_image(image_name, fade_enabled=False, file_extension=".png"):
     try:
         #! Add stuff for loading images of the correct resolution
         # depending on the player's resolution settings
+        image_path = path_to("assets/images", image_name + file_extension)
+        try:
+            image = pygame.image.load(image_path)
+        except pygame.error:
+            raise FileNotFoundError
         if not fade_enabled:
-            return pygame.image.load(
-                path_to("assets/images", image_name + file_extension)
-            ).convert_alpha()   # Fixes per pixel alphas permanently
+            return image.convert_alpha()  # Fixes per pixel alphas permanently
         else:
-            return pygame.image.load(
-                path_to("assets/images", image_name + file_extension)
-            ).convert()
+            return image.convert()
     except Exception:
         log("Failed to load image: ", image_name, file_extension)
 
