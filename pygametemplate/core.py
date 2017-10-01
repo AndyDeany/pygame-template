@@ -3,7 +3,7 @@ import os
 import sys
 import traceback
 from datetime import datetime
-from ctypes import windll
+import ctypes
 
 from pygametemplate.exceptions import CaughtFatalException
 
@@ -29,7 +29,7 @@ def log(*error_message, **options):
     if fatal:
         text = ("An error has occurred:\n\n    {}.\n\n\n"
                 "Please check log.txt for details.").format(error_message)
-        windll.user32.MessageBoxW(0, text, "Error", 0)
+        ctypes.windll.user32.MessageBoxW(0, text, "Error", 0)
         raise CaughtFatalException(sys.exc_info()[1])
     else:
         pass    # TODO: Add some code here to show an error message in game
