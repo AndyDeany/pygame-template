@@ -10,8 +10,10 @@ import pygame
 from pygametemplate.exceptions import CaughtFatalException
 
 
-PATH = os.getcwd()
+TEST = bool(int(os.environ.get("TEST", "0")))
 
+
+PATH = os.getcwd()
 
 def path_to(*path):
     """Returns the complete absolute path of the path given."""
@@ -28,7 +30,7 @@ def log(*error_message, **options):
         log_file.write("{} - {}.\n".format(datetime.utcnow(), error_message))
         log_file.write(traceback.format_exc() + "\n")
 
-    if fatal:
+    if fatal and not TEST:
         text = ("An error has occurred:\n\n    {}.\n\n\n"
                 "Please check log.txt for details.").format(error_message)
         ctypes.windll.user32.MessageBoxW(0, text, "Error", 0)
