@@ -5,6 +5,8 @@ import traceback
 from datetime import datetime
 import ctypes
 
+import pygame
+
 from pygametemplate.exceptions import CaughtFatalException
 
 
