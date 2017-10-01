@@ -7,9 +7,5 @@ class TestGame(Game):
     def __init__(self, StartingView, resolution):
         super(TestGame, self).__init__(StartingView, resolution)
 
-    def log(self, *error_message):
-        """Altered log function which just raises errors."""
-        raise
-
 
 game = TestGame(ExampleView, (1280, 720))
