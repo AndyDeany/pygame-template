@@ -14,7 +14,6 @@ except ImportError:
 
 from pygametemplate import log, load_image
 from pygametemplate.system import System
-from pygametemplate.helper import Helper
 from pygametemplate.console import Console
 from pygametemplate.userinput import Input
 from pygametemplate.hotkey import Hotkey
@@ -42,7 +41,6 @@ class Game(object):
         self.frame = 0  # The current frame the game is on (since the game was opened)
 
         self.input = Input(self)
-        self.helper = Helper(self)
         self.console = Console(self)
 
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed

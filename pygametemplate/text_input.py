@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from collections import deque
 
 from pygametemplate import log
+from pygametemplate.helper import load_class_assets
 from pygametemplate.hotkey import Hotkey
 
 
@@ -34,9 +35,7 @@ class TextInput(object):
         self.instances.append(self)
 
     def load_class_assets(self, game):
-        game.helper.load_class_assets(self, {
-            "game": game
-        })
+        load_class_assets(self, {"game": game})
 
     def destroy(self):
         self.instances.remove(self)
