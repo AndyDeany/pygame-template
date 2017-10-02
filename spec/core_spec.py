@@ -44,14 +44,14 @@ with description("pygametemplate.core"):
                 raise ValueError("example raised error message")
             except ValueError:
                 log(extended_error_message, fatal=False)
-                time_logged = datetime.utcnow()
+                datetime_logged = datetime.utcnow()
                 expected_traceback = traceback.format_exc()
 
-            details = (time_logged, extended_error_message, expected_traceback)
-            expected_logged_error = "{} - {}.\n{}\n".format(*details)
-
+            summary_line_regex = r"%s.\d{6} - %s" % (str(datetime_logged).split(".")[0],
+                                                     extended_error_message)
             with open("log.txt", "r") as log_file:
-                expect(log_file.read()).to(equal(expected_logged_error))
+                expect(log_file.readline()).to(match(summary_line_regex))
+                expect(log_file.read()).to(equal(expected_traceback + "\n"))
 
             os.remove("log.txt")
 
