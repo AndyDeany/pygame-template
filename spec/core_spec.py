@@ -62,10 +62,10 @@ with description("pygametemplate.core"):
     with context(".load_image()"):
         global check_images_equal
 
-        def check_images_equal(img1, img2):
-            expect(type(img1)).to(equal(type(img2)))
-            expect(img1.get_size()).to(equal(img2.get_size()))
-            expect(img1.get_alpha()).to(equal(img2.get_alpha()))
+        def check_images_equal(actual, expected):
+            expect(type(actual)).to(equal(type(expected)))
+            expect(actual.get_size()).to(equal(expected.get_size()))
+            expect(actual.get_alpha()).to(equal(expected.get_alpha()))
 
         with it("should load a .png image correctly"):
             image = load_image("test")
@@ -85,7 +85,7 @@ with description("pygametemplate.core"):
             expected_image = pygame.image.load(test_png_path).convert()
             check_images_equal(image, expected_image)
 
-        with it("should raise an error when trying to load an image that doesn't exist"):
+        with it("should raise an error when the given image name isn't found"):
             expect(lambda: load_image("non_existant")).to(raise_error(IOError))
 
     with context(".load_font()"):
