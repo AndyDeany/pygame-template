@@ -7,7 +7,9 @@
 
 [![Codeship Build Status][codeship-image]][codeship-url]
 
-This is my pygame template. It allows for a smooth reactive typing interface, as all keyboard inputs are well defined. Mouse inputs and other standard things like screen size are already defined too.
+This is my pygame template. It allows for a smooth reactive typing interface,
+as all keyboard inputs are well defined.
+Mouse inputs and other standard things like screen size are already defined too.
 
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/ex4iedu3u9hdae2w/branch/master?svg=true
