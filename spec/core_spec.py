@@ -89,4 +89,50 @@ with description("pygametemplate.core"):
             expect(lambda: load_image("non_existant")).to(raise_error(IOError))
 
     with context(".load_font()"):
-        pass
+        global check_fonts_equal
+
+        def check_fonts_equal(actual, expected):
+            expect(actual.get_bold()).to(equal(expected.get_bold()))
+            expect(actual.get_italic()).to(equal(expected.get_italic()))
+            expect(actual.get_underline()).to(equal(expected.get_underline()))
+
+            expect(actual.get_height()).to(equal(expected.get_height()))
+            expect(actual.get_linesize()).to(equal(expected.get_linesize()))
+
+            expect(actual.get_ascent()).to(equal(expected.get_ascent()))
+            expect(actual.get_descent()).to(equal(expected.get_descent()))
+
+            sample_strings = (
+                "hello", "goodbye",
+                "What's the time, Mr Wolf?",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                "Morbi fringilla dignissim nisl, nec tincidunt felis faucibus sed. "
+                "Pellentesque laoreet odio justo, ac commodo diam eleifend vitae. "
+                "Donec viverra ipsum diam, non euismod ex semper non. "
+                "Proin fermentum lorem vitae felis vehicula suscipit. "
+                "Nulla eu condimentum nisi, ut viverra neque. "
+                "Ut condimentum mattis ligula, id maximus lacus congue in. "
+                "Donec nec tempus leo, nec rhoncus leo. "
+                "Donec condimentum semper sapien at ultricies. "
+                "Integer fermentum velit vel mauris posuere sollicitudin. "
+                "Cras lobortis metus a varius iaculis. "
+                "Aliquam feugiat, diam a hendrerit facilisis, "
+                "lacus diam molestie purus, nec sagittis leo magna ac lorem. "
+                "Nam tristique tortor at suscipit tincidunt. "
+                "Interdum et malesuada fames ac ante ipsum primis in faucibus. "
+                "Etiam eget urna ut purus pulvinar egestas. "
+                "Morbi quis malesuada tellus. "
+                "Donec vestibulum, lorem vel ullamcorper scelerisque, "
+                "lectus odio euismod arcu, et auctor urna augue non lectus.",
+                "Phew, it worked :)"
+            )
+            for string in sample_strings:
+                expect(actual.size(string)).to(equal(expected.size(string)))
+
+        with it("should load a .ttf font correctly"):
+            test_font_path = path_to("assets/fonts/chewy.ttf")
+            expected_font = pygame.font.Font(test_font_path, 12)
+            check_fonts_equal(load_font("chewy", 12), expected_font)
+
+        with it("should raise an error when the given font name isn't found"):
+            expect(lambda: load_font("non_existant", 12)).to(raise_error(IOError))
