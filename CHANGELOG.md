@@ -5,6 +5,22 @@
 * Add missing `pygame` import in the `pygametemplate.core` module which
 was causing the `load_image()` and `load_font()` functions to throw an error.
 
+* Add unit tests for the `pygametemplate.core` module.
+
+* Make `pygametemplate.core.load_image()` raise `IOError` instead of `pygame.error`
+when trying to load an image that can't be found, so that it actually passes unit tests.
+
+* Add `TEST` environment variable functionality.
+Set this to `"1"` to indicate that your game is being run by automated tests.
+Currently, doing this enables the following behaviour:
+    * `core.log()` will reraise the last thrown exception,
+    instead of doing `raise CaughtFatalException`.
+    This makes it easier to test that your functions/methods raise
+    the errors you expect them to, as they will just raise these errors.
+
+    * `core.log()` will not open a popup window on fatal errors.
+    This is because interacting with this window from automated tests is very difficult.
+
 ## 0.4.0
 
 * [**Backwards incompatible change**]<br>
