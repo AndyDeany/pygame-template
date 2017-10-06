@@ -32,7 +32,7 @@ def log(*error_message, **options):
 
     if fatal:
         if TEST:
-            raise
+            raise   # pylint: disable=misplaced-bare-raise
         text = ("An error has occurred:\n\n    {}.\n\n\n"
                 "Please check log.txt for details.").format(error_message)
         ctypes.windll.user32.MessageBoxW(0, text, "Error", 0)
