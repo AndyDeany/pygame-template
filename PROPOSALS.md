@@ -9,10 +9,10 @@ along with loading and unloading from RAM.
 
 * Remove silly `try/except` blocks.
 
-* Create new `test_requirements.txt` file for test- qonly requirements.
+* Create new `test_requirements.txt` file for test-only requirements.
 
 ## Major
 
 * Remove Python 2 support.
-    * Change `IOError`s `FileNotFoundError` (most of them, at least).
+    * Change `IOError`s to `FileNotFoundError` (most of them, at least).
     * Add `encoding="utf-8"` to `open()` calls.
