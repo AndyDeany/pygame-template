@@ -78,8 +78,8 @@ with description("pygametemplate.core"):
             expected_image = pygame.image.load(test_ico_path).convert_alpha()
             self.check_images_equal(image, expected_image)
 
-        with it("should load a non-fixed-alpha .png image correctly"):
-            image = load_image("test", fade_enabled=True)
+        with it("should load a non-fixed-alphas .png image correctly"):
+            image = load_image("test", fix_alphas=False)
             test_png_path = path_to("assets/images/test.png")
             expected_image = pygame.image.load(test_png_path).convert()
             self.check_images_equal(image, expected_image)

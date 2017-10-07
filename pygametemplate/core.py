@@ -42,7 +42,7 @@ def log(*error_message, **options):
 
 
 # Asset loading
-def load_image(image_name, fade_enabled=False, file_extension=".png"):
+def load_image(image_name, fix_alphas=True, file_extension=".png"):
     """fade_enabled should be True if you want images to be able to fade"""
     # TODO: Add stuff for loading images of the correct resolution
     # depending on the player's resolution settings.
@@ -55,10 +55,9 @@ def load_image(image_name, fade_enabled=False, file_extension=".png"):
     except IOError:
         log("Image file not found: ", image_name, file_extension)
 
-    if not fade_enabled:
+    if fix_alphas:
         return image.convert_alpha()  # Fixes per pixel alphas permanently
-    else:
-        return image.convert()
+    return image.convert()
 
 
 def load_font(font_name, font_size, file_extension=".ttf"):
