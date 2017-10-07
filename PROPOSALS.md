@@ -9,10 +9,6 @@ along with loading and unloading from RAM.
 
 * Remove silly `try/except` blocks.
 
-* Create new `test_requirements.txt` file for test-only requirements.
-Also make `setup.py` read `requirements.txt` into `install_requires`
-programatically?
-
 ## Major
 
 * Remove Python 2 support.
