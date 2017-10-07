@@ -7,7 +7,7 @@ import ctypes
 
 import pygame
 
-from pygametemplate.exceptions import CaughtFatalException
+from pygametemplate.exceptions import CaughtFatalException, PygameError
 
 
 TEST = bool(int(os.environ.get("TEST", "0")))
@@ -55,7 +55,7 @@ def load_image(image_name, fix_alphas=True, file_extension=".png"):
     try:
         try:
             image = pygame.image.load(image_path)
-        except pygame.error:
+        except PygameError:
             raise IOError
     except IOError:
         log("Image file not found: ", image_name, file_extension)
