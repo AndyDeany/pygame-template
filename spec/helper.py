@@ -1,5 +1,7 @@
-from pygametemplate import Game
-from example_view import ExampleView
+from expects import *
+
+from pygametemplate import Game as _Game
+from example_view import ExampleView as _ExampleView
 
 
-game = Game(ExampleView, (1280, 720))
+game = _Game(_ExampleView, (1280, 720))

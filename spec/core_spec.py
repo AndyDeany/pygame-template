@@ -3,10 +3,9 @@ import os
 import traceback
 from datetime import datetime
 
-from expects import *
 import pygame
 
-from spec.helper import game
+from spec.helper import *
 from pygametemplate.core import path_to, log, load_image, load_font
 
 
