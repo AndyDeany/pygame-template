@@ -43,7 +43,12 @@ def log(*error_message, **options):
 
 # Asset loading
 def load_image(image_name, fix_alphas=True, file_extension=".png"):
-    """fade_enabled should be True if you want images to be able to fade"""
+    """Load the image with the given `image_name` (excluding file extension).
+
+    Setting `fix_alphas` to False enables the image to be able to fade.
+    A different file extension can be specified via the
+    `file_extension` keyword argument, which defaults to ".png".
+    """
     # TODO: Add stuff for loading images of the correct resolution
     # depending on the player's resolution settings.
     image_path = path_to("assets/images", image_name + file_extension)
