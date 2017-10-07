@@ -59,79 +59,79 @@ with description("pygametemplate.core"):
         #     pass
 
     with context(".load_image()"):
-        global check_images_equal
-
-        def check_images_equal(actual, expected):
-            expect(type(actual)).to(equal(type(expected)))
-            expect(actual.get_size()).to(equal(expected.get_size()))
-            expect(actual.get_alpha()).to(equal(expected.get_alpha()))
+        with before.all:
+            def check_images_equal(actual, expected):
+                expect(type(actual)).to(equal(type(expected)))
+                expect(actual.get_size()).to(equal(expected.get_size()))
+                expect(actual.get_alpha()).to(equal(expected.get_alpha()))
+            self.check_images_equal = check_images_equal
 
         with it("should load a .png image correctly"):
             image = load_image("test")
             test_png_path = path_to("assets/images/test.png")
             expected_image = pygame.image.load(test_png_path).convert_alpha()
-            check_images_equal(image, expected_image)
+            self.check_images_equal(image, expected_image)
 
         with it("should load a .ico image correctly"):
             image = load_image("test", file_extension=".ico")
             test_ico_path = path_to("assets/images/test.ico")
             expected_image = pygame.image.load(test_ico_path).convert_alpha()
-            check_images_equal(image, expected_image)
+            self.check_images_equal(image, expected_image)
 
         with it("should load a non-fixed-alpha .png image correctly"):
             image = load_image("test", fade_enabled=True)
             test_png_path = path_to("assets/images/test.png")
             expected_image = pygame.image.load(test_png_path).convert()
-            check_images_equal(image, expected_image)
+            self.check_images_equal(image, expected_image)
 
         with it("should raise an error when the given image name isn't found"):
             expect(lambda: load_image("non_existant")).to(raise_error(IOError))
 
     with context(".load_font()"):
-        global check_fonts_equal
+        with before.all:
+            def check_fonts_equal(actual, expected):
+                expect(actual.get_bold()).to(equal(expected.get_bold()))
+                expect(actual.get_italic()).to(equal(expected.get_italic()))
+                expect(actual.get_underline()).to(equal(expected.get_underline()))
 
-        def check_fonts_equal(actual, expected):
-            expect(actual.get_bold()).to(equal(expected.get_bold()))
-            expect(actual.get_italic()).to(equal(expected.get_italic()))
-            expect(actual.get_underline()).to(equal(expected.get_underline()))
+                expect(actual.get_height()).to(equal(expected.get_height()))
+                expect(actual.get_linesize()).to(equal(expected.get_linesize()))
 
-            expect(actual.get_height()).to(equal(expected.get_height()))
-            expect(actual.get_linesize()).to(equal(expected.get_linesize()))
+                expect(actual.get_ascent()).to(equal(expected.get_ascent()))
+                expect(actual.get_descent()).to(equal(expected.get_descent()))
 
-            expect(actual.get_ascent()).to(equal(expected.get_ascent()))
-            expect(actual.get_descent()).to(equal(expected.get_descent()))
-
-            sample_strings = (
-                "hello", "goodbye",
-                "What's the time, Mr Wolf?",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                "Morbi fringilla dignissim nisl, nec tincidunt felis faucibus sed. "
-                "Pellentesque laoreet odio justo, ac commodo diam eleifend vitae. "
-                "Donec viverra ipsum diam, non euismod ex semper non. "
-                "Proin fermentum lorem vitae felis vehicula suscipit. "
-                "Nulla eu condimentum nisi, ut viverra neque. "
-                "Ut condimentum mattis ligula, id maximus lacus congue in. "
-                "Donec nec tempus leo, nec rhoncus leo. "
-                "Donec condimentum semper sapien at ultricies. "
-                "Integer fermentum velit vel mauris posuere sollicitudin. "
-                "Cras lobortis metus a varius iaculis. "
-                "Aliquam feugiat, diam a hendrerit facilisis, "
-                "lacus diam molestie purus, nec sagittis leo magna ac lorem. "
-                "Nam tristique tortor at suscipit tincidunt. "
-                "Interdum et malesuada fames ac ante ipsum primis in faucibus. "
-                "Etiam eget urna ut purus pulvinar egestas. "
-                "Morbi quis malesuada tellus. "
-                "Donec vestibulum, lorem vel ullamcorper scelerisque, "
-                "lectus odio euismod arcu, et auctor urna augue non lectus.",
-                "Phew, it worked :)"
-            )
-            for string in sample_strings:
-                expect(actual.size(string)).to(equal(expected.size(string)))
+                sample_strings = (
+                    "hello", "goodbye",
+                    "What's the time, Mr Wolf?",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    "Morbi fringilla dignissim nisl, nec tincidunt felis faucibus sed. "
+                    "Pellentesque laoreet odio justo, ac commodo diam eleifend vitae. "
+                    "Donec viverra ipsum diam, non euismod ex semper non. "
+                    "Proin fermentum lorem vitae felis vehicula suscipit. "
+                    "Nulla eu condimentum nisi, ut viverra neque. "
+                    "Ut condimentum mattis ligula, id maximus lacus congue in. "
+                    "Donec nec tempus leo, nec rhoncus leo. "
+                    "Donec condimentum semper sapien at ultricies. "
+                    "Integer fermentum velit vel mauris posuere sollicitudin. "
+                    "Cras lobortis metus a varius iaculis. "
+                    "Aliquam feugiat, diam a hendrerit facilisis, "
+                    "lacus diam molestie purus, nec sagittis leo magna ac lorem. "
+                    "Nam tristique tortor at suscipit tincidunt. "
+                    "Interdum et malesuada fames ac ante ipsum primis in faucibus. "
+                    "Etiam eget urna ut purus pulvinar egestas. "
+                    "Morbi quis malesuada tellus. "
+                    "Donec vestibulum, lorem vel ullamcorper scelerisque, "
+                    "lectus odio euismod arcu, et auctor urna augue non lectus.",
+                    "Phew, it worked :)"
+                )
+                for string in sample_strings:
+                    expect(actual.size(string)).to(equal(expected.size(string)))
+            self.check_fonts_equal = check_fonts_equal
 
         with it("should load a .ttf font correctly"):
             test_font_path = path_to("assets/fonts/chewy.ttf")
             expected_font = pygame.font.Font(test_font_path, 12)
-            check_fonts_equal(load_font("chewy", 12), expected_font)
+            self.check_fonts_equal(load_font("chewy", 12), expected_font)
 
         with it("should raise an error when the given font name isn't found"):
             expect(lambda: load_font("non_existant", 12)).to(raise_error(IOError))
