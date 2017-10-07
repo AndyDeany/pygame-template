@@ -6,6 +6,7 @@ environment:
 
 install:
   - pip install -r requirements.txt
+  - pip install -r test_requirements.txt
   - pip install codacy-coverage
 build: off
 test_script:
