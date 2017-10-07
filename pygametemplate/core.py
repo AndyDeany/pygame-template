@@ -16,7 +16,7 @@ TEST = bool(int(os.environ.get("TEST", "0")))
 PATH = os.getcwd()
 
 def path_to(*path):
-    """Returns the complete absolute path of the path given."""
+    """Return the complete absolute path of the path given."""
     return os.path.join(PATH, *"/".join(path).split("/"))
 
 
