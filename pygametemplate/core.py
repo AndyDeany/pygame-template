@@ -66,9 +66,9 @@ def load_image(image_name, fix_alphas=True, file_extension=".png"):
 
 
 def load_font(font_name, font_size, file_extension=".ttf"):
+    """Load the font with the given `font_name` with the given `font_size`."""
+    font_path = path_to("assets/fonts", font_name + file_extension)
     try:
-        return pygame.font.Font(
-            path_to("assets/fonts", font_name + file_extension), font_size
-        )
-    except Exception:
-        log("Failed to load font: ", font_name, file_extension)
+        return pygame.font.Font(font_path, font_size)
+    except IOError:
+        log("Font file not found: ", font_name, file_extension)
