@@ -1,11 +1,7 @@
-from pygametemplate import Game
-from example_view import ExampleView
+from expects import *
+
+from pygametemplate import Game as _Game
+from example_view import ExampleView as _ExampleView
 
 
-class TestGame(Game):
-    """An altered Game class for testing purposes."""
-    def __init__(self, StartingView, resolution):
-        super(TestGame, self).__init__(StartingView, resolution)
-
-
-game = TestGame(ExampleView, (1280, 720))
+game = _Game(_ExampleView, (1280, 720))

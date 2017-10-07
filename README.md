@@ -7,12 +7,10 @@
 
 [![Codeship Build Status][codeship-image]][codeship-url]
 
-This is my pygame template. It allows for a smooth reactive typing interface, as all keyboard inputs are well defined. Mouse inputs and other standard things like screen size are already defined too.
+This is my pygame template. It allows for a smooth reactive typing interface,
+as all keyboard inputs are well defined.
+Mouse inputs and other standard things like screen size are already defined too.
 
-**Be sure to remove the code surrounded by `#!!! TEST - REMOVE`. It is only there to make sure the text input still works.**
-
-## Before compiling/releasing
-- Ensure you run `pep8 --select=E262,E265` to ensure all comments starting with `#!` (warning comments) have been resolved and removed (or you are happy leaving them unresolved until a later date).
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/ex4iedu3u9hdae2w/branch/master?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/AndyDeany/pygame-template
@@ -22,3 +20,37 @@ This is my pygame template. It allows for a smooth reactive typing interface, as
 [coverage-url]: https://www.codacy.com/app/AndyDeany/pygame-template?utm_source=github.com&utm_medium=referral&utm_content=AndyDeany/pygame-template&utm_campaign=Badge_Coverage
 [codacy-image]: https://api.codacy.com/project/badge/Grade/8767091123c14b6a90ec5902069b4c9e
 [codacy-url]: https://www.codacy.com/app/AndyDeany/pygame-template?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndyDeany/pygame-template&amp;utm_campaign=Badge_Grade
+
+# Docs
+
+## Environment variables
+
+`pygametemplate` provides some environment variables that you can set to
+change the functionality of some things at run time.
+These are detailed below.
+
+### `TEST`
+
+When you are running automated tests against your game,
+there are some things that you want to function slightly differently.
+
+In order to enable automated testing mode,
+you should set the `TEST` environment variable to `"1"`.
+You can do this in Python like so:
+
+```Python
+import os
+
+
+os.environ["TEST"] = "1"
+```
+
+This enables the following functionality:
+
+* `core.log()` will reraise the last thrown exception,
+instead of doing `raise CaughtFatalException`.
+This makes it easier to test that your functions/methods raise
+the errors you expect them to, as they will just raise these errors.
+
+* `core.log()` will not open a popup window on fatal errors.
+This is because interacting with this window from automated tests is very difficult.

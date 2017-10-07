@@ -5,11 +5,15 @@ import traceback
 from datetime import datetime
 import ctypes
 
+import pygame
+
 from pygametemplate.exceptions import CaughtFatalException
 
 
-PATH = os.getcwd()
+TEST = bool(int(os.environ.get("TEST", "0")))
 
+
+PATH = os.getcwd()
 
 def path_to(*path):
     """Returns the complete absolute path of the path given."""
@@ -27,6 +31,8 @@ def log(*error_message, **options):
         log_file.write(traceback.format_exc() + "\n")
 
     if fatal:
+        if TEST:
+            raise   # pylint: disable=misplaced-bare-raise
         text = ("An error has occurred:\n\n    {}.\n\n\n"
                 "Please check log.txt for details.").format(error_message)
         ctypes.windll.user32.MessageBoxW(0, text, "Error", 0)
@@ -41,14 +47,15 @@ def load_image(image_name, fade_enabled=False, file_extension=".png"):
     try:
         #! Add stuff for loading images of the correct resolution
         # depending on the player's resolution settings
+        image_path = path_to("assets/images", image_name + file_extension)
+        try:
+            image = pygame.image.load(image_path)
+        except pygame.error:
+            raise IOError
         if not fade_enabled:
-            return pygame.image.load(
-                path_to("assets/images", image_name + file_extension)
-            ).convert_alpha()   # Fixes per pixel alphas permanently
+            return image.convert_alpha()  # Fixes per pixel alphas permanently
         else:
-            return pygame.image.load(
-                path_to("assets/images", image_name + file_extension)
-            ).convert()
+            return image.convert()
     except Exception:
         log("Failed to load image: ", image_name, file_extension)
 
