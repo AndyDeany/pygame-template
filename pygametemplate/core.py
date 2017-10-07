@@ -44,20 +44,21 @@ def log(*error_message, **options):
 # Asset loading
 def load_image(image_name, fade_enabled=False, file_extension=".png"):
     """fade_enabled should be True if you want images to be able to fade"""
+    # TODO: Add stuff for loading images of the correct resolution
+    # depending on the player's resolution settings.
+    image_path = path_to("assets/images", image_name + file_extension)
     try:
-        #! Add stuff for loading images of the correct resolution
-        # depending on the player's resolution settings
-        image_path = path_to("assets/images", image_name + file_extension)
         try:
             image = pygame.image.load(image_path)
         except pygame.error:
             raise IOError
-        if not fade_enabled:
-            return image.convert_alpha()  # Fixes per pixel alphas permanently
-        else:
-            return image.convert()
-    except Exception:
-        log("Failed to load image: ", image_name, file_extension)
+    except IOError:
+        log("Image file not found: ", image_name, file_extension)
+
+    if not fade_enabled:
+        return image.convert_alpha()  # Fixes per pixel alphas permanently
+    else:
+        return image.convert()
 
 
 def load_font(font_name, font_size, file_extension=".ttf"):
