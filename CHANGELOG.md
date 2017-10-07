@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+* [**Backwards incompatible change**]<br>
+Replace `core.load_image()`'s `fade_enabled` parameter with a `fix_alphas`
+parameter. If you used to pass in `fade_enabled=True`, you should now pass in
+`fix_alphas=False`.
+
+
 ## 0.4.1
 
 * Add missing `pygame` import in the `pygametemplate.core` module which
