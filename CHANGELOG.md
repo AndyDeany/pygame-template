@@ -7,6 +7,8 @@ Replace `core.load_image()`'s `fade_enabled` parameter with a `fix_alphas`
 parameter. If you used to pass in `fade_enabled=True`, you should now pass in
 `fix_alphas=False`.
 
+* Add `pygametemplate.exceptions.PygameError` as an alias for `pygame.error`.
+
 
 ## 0.4.1
 
