@@ -37,8 +37,8 @@ def log(*error_message, **options):
                 "Please check log.txt for details.").format(error_message)
         ctypes.windll.user32.MessageBoxW(0, text, "Error", 0)
         raise CaughtFatalException(sys.exc_info()[1])
-    else:
-        pass    # TODO: Add some code here to show an error message in game
+
+    # TODO: Add some code here to show an error message in game
 
 
 # Asset loading
