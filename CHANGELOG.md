@@ -9,6 +9,14 @@ parameter. If you used to pass in `fade_enabled=True`, you should now pass in
 
 * Add `pygametemplate.exceptions.PygameError` as an alias for `pygame.error`.
 
+* Add new `pygametemplate.debug` module with a `DebugConsole` member.
+This `DebugConsole` can be initialised in your game code, similar to
+`pygametemplate.Console`. The difference here is that this `DebugConsole`
+(which can be opened by pressing ` [default]) allows you to type in oneline
+Python code which will be executed using `exec()` or, failing this,
+evaluated using `eval()`. If this fails too, the original raised exception
+will be shown.
+
 
 ## 0.4.1
 
