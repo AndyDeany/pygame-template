@@ -2,8 +2,6 @@
 
 ## Minor
 
-* Add `pygametemplate.additional` module with `DebugConsole` class.
-
 * `Image` class with `Image.display(pygame.Surface())` method,
 along with loading and unloading from RAM.
 
