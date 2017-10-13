@@ -100,11 +100,12 @@ class DebugConsole(object):
         if self.active and not self.text_input.accepting_text:
             command = self.text_input.most_recent()
             try:
-                self.output = self.font.render(str(eval(command)), True,
+                evaluated = str(eval(command))  # pylint: disable=eval-used
+                self.output = self.font.render(evaluated, True,
                                                self.default_output_colour)
             except Exception:
                 try:
-                    exec(command)
+                    exec(command)   # pylint: disable=exec-used
                 except Exception as error:
                     self.output = self.font.render("%s: %s" % (type(error).__name__, error),
                                                    True, self.error_output_colour)
