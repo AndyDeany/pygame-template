@@ -1,4 +1,4 @@
-version: 0.4.1#{build}
+version: 0.5.0#{build}
 
 environment:
   CODACY_PROJECT_TOKEN:
@@ -6,6 +6,7 @@ environment:
 
 install:
   - pip install -r requirements.txt
+  - pip install -r test_requirements.txt
   - pip install codacy-coverage
 build: off
 test_script:

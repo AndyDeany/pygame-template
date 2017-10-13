@@ -3,6 +3,9 @@ from setuptools import setup
 import pygametemplate
 
 
+with open("requirements.txt", "r") as requirements_file:
+    requirements = requirements_file.read().split()
+
 setup(
     name="pygametemplate",
     version=pygametemplate.__version__,
@@ -14,7 +17,7 @@ setup(
     author_email=pygametemplate.__author_email__,
     packages=(pygametemplate.__name__,),
     keywords=("pygame", "template", "gamedev"),
-    install_requires=("pygame>=1.9.3",),
+    install_requires=requirements,
     classifiers=(
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
