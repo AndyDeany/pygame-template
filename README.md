@@ -18,7 +18,7 @@ Mouse inputs and other standard things like screen size are already defined too.
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/ex4iedu3u9hdae2w/branch/master?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/AndyDeany/pygame-template
-[travis-ci-image]: https://travis-ci.org/AndyDeany/pygame-template.svg?branch=v0.5.0
+[travis-ci-image]: https://travis-ci.org/AndyDeany/pygame-template.svg?branch=master
 [travis-ci-url]: https://travis-ci.org/AndyDeany/pygame-template
 [circle-ci-image]: https://circleci.com/gh/AndyDeany/pygame-template.svg?style=shield&circle-token=:circle-token
 [circle-ci-url]: https://circleci.com/gh/AndyDeany/pygame-template
