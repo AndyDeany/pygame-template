@@ -4,12 +4,20 @@ environment:
   CODACY_PROJECT_TOKEN:
     secure: ET1MxxGbElQhl8BnS8Aj0AYR7eEMCzJEGBYWDJqDOFvTqWt6txZ1stIBOx2k3F/l
 
+  matrix:
+    - PYTHON: C:\\Python34
+    - PYTHON: C:\\Python35
+    - PYTHON: C:\\Python36
+
 install:
+  - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+  - python --version
+
   - pip install -r requirements.txt
   - pip install -r test_requirements.txt
   - pip install codacy-coverage
 build: off
 test_script:
-  - mamba --format documentation --enable-coverage
+  - mamba --enable-coverage
   - coverage xml
   - ./upload-codacy-coverage.bat
