@@ -1,5 +1,7 @@
 version: 0.5.0#{build}
 
+build: off
+
 environment:
   matrix:
     - PYTHON: C:\\Python34
@@ -12,6 +14,6 @@ install:
 
   - pip install -r requirements.txt
   - pip install -r test_requirements.txt
-build: off
+
 test_script:
   - mamba
