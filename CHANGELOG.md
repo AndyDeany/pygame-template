@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0
+
+First pypi release.
+
+* [**Backwards incompatible change**]<br>
+Remove Python 3 support.
+
 ## 0.5.0
 
 **Warning**: This release is broken. Please use `0.6.0` instead.
