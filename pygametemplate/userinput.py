@@ -1,4 +1,3 @@
-from pygametemplate import log
 from pygametemplate.button import Button
 
 

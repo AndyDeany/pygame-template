@@ -1,7 +1,5 @@
 import time
 
-from pygametemplate import log
-
 
 class Button(object):
     """Class representing keyboard keys."""

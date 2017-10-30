@@ -1,6 +1,5 @@
 from collections import deque
 
-from pygametemplate import log
 from pygametemplate.helper import load_class_assets
 from pygametemplate.hotkey import Hotkey
 

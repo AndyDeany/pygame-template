@@ -9,7 +9,7 @@ try:
 except ImportError:
     pass
 
-from pygametemplate import log, load_image
+from pygametemplate import load_image
 from pygametemplate.system import System
 from pygametemplate.console import Console
 from pygametemplate.userinput import Input
