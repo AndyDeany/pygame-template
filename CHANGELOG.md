@@ -2,6 +2,8 @@
 
 ## 0.5.0
 
+**Warning**: This release is broken. Please use `0.6.0` instead.
+
 * [**Backwards incompatible change**]<br>
 Replace `core.load_image()`'s `fade_enabled` parameter with a `fix_alphas`
 parameter. If you used to pass in `fade_enabled=True`, you should now pass in

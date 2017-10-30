@@ -15,6 +15,8 @@ This is my pygame template. It allows for a smooth reactive typing interface,
 as all keyboard inputs are well defined.
 Mouse inputs and other standard things like screen size are already defined too.
 
+Only Python versions 3.4+ are supported.
+
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/ex4iedu3u9hdae2w/branch/master?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/AndyDeany/pygame-template
