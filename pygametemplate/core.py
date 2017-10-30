@@ -22,11 +22,10 @@ def path_to(*path):
 
 LOG_FILE = path_to("log.txt")
 
-def log(*error_message, **options):
+def log(*error_message, fatal=True):
     """Takes 1 or more variables and concatenates them to create the error message."""
-    fatal = options.get("fatal", True)  # `fatal` option defaults to True
     error_message = "".join(map(str, error_message))
-    with open(LOG_FILE, "a") as log_file:
+    with open(LOG_FILE, "a", encoding="utf-8") as log_file:
         log_file.write("{} - {}.\n".format(datetime.utcnow(), error_message))
         log_file.write(traceback.format_exc() + "\n")
 
@@ -56,8 +55,8 @@ def load_image(image_name, fix_alphas=True, file_extension=".png"):
         try:
             image = pygame.image.load(image_path)
         except PygameError:
-            raise IOError
-    except IOError:
+            raise FileNotFoundError
+    except FileNotFoundError:
         log("Image file not found: ", image_name, file_extension)
 
     if fix_alphas:
@@ -70,5 +69,5 @@ def load_font(font_name, font_size, file_extension=".ttf"):
     font_path = path_to("assets/fonts", font_name + file_extension)
     try:
         return pygame.font.Font(font_path, font_size)
-    except IOError:
+    except FileNotFoundError:
         log("Font file not found: ", font_name, file_extension)

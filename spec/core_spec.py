@@ -34,7 +34,7 @@ with description("pygametemplate.core"):
     with context(".log()"):
         try:
             os.remove("log.txt")    # Clean starting environment
-        except OSError:   # TODO: Change to FileNotFoundError (python3 only)
+        except FileNotFoundError:
             pass
 
         with it("should log a non-fatal error correctly"):
@@ -48,7 +48,7 @@ with description("pygametemplate.core"):
 
             summary_line_regex = r"%s.\d{6} - %s" % (str(datetime_logged).split(".")[0],
                                                      extended_error_message)
-            with open("log.txt", "r") as log_file:
+            with open("log.txt", "r", encoding="utf-8") as log_file:
                 expect(log_file.readline()).to(match(summary_line_regex))
                 expect(log_file.read()).to(equal(expected_traceback + "\n"))
 

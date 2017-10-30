@@ -1,0 +1,16 @@
+language: python
+python:
+  - 3.4
+  - 3.5
+  - 3.6
+addons:
+  apt:
+    packages:
+      - xvfb
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+  - pip install -r requirements.txt
+  - pip install -r test_requirements.txt
+script:
+  - mamba --format documentation

@@ -1,21 +1,22 @@
 from setuptools import setup
 
-import pygametemplate
 
+version = "0.6.0"
+url = "https://github.com/AndyDeany/pygame-template"
 
 with open("requirements.txt", "r") as requirements_file:
     requirements = requirements_file.read().split()
 
 setup(
     name="pygametemplate",
-    version=pygametemplate.__version__,
+    version=version,
     license="MIT",
-    description=pygametemplate.__doc__,
-    url="https://github.com/AndyDeany/pygame-template",
-    download_url=pygametemplate.__download_url__,
-    author=pygametemplate.__author__,
-    author_email=pygametemplate.__author_email__,
-    packages=(pygametemplate.__name__,),
+    description="Making making games with Pygame easier :)",
+    url=url,
+    download_url="{}/archive/v{}.tar.gz".format(url, version),
+    author="Andrew Dean",
+    author_email="oneandydean@hotmail.com",
+    packages=("pygametemplate",),
     keywords=("pygame", "template", "gamedev"),
     install_requires=requirements,
     classifiers=(

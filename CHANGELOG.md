@@ -1,6 +1,21 @@
 # Changelog
 
+## 0.6.0
+
+First pypi release.
+
+* [**Backwards incompatible change**]<br>
+Remove Python 2 support.
+
+* [**Backwards incompatible change**]<br>
+`Console.__init__()`'s `toggle_fps_hotkey` argument must now be passed in as a keyword.
+
+* `pygametemplate.core.load_image()` now raises a `FileNotFoundError` instead
+of an `IOError` when an image file with the given name can't be found.
+
 ## 0.5.0
+
+**Warning**: This release is broken. Please use `0.6.0` instead.
 
 * [**Backwards incompatible change**]<br>
 Replace `core.load_image()`'s `fade_enabled` parameter with a `fix_alphas`
