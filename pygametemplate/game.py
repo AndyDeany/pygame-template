@@ -9,7 +9,7 @@ try:
 except ImportError:
     pass
 
-from pygametemplate import log, load_image
+from pygametemplate import load_image
 from pygametemplate.system import System
 from pygametemplate.console import Console
 from pygametemplate.userinput import Input
@@ -19,11 +19,8 @@ from pygametemplate.text_input import TextInput
 
 class Game(object):
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed"):
-        try:
-            pygame.init()
-            self.pygame = pygame
-        except Exception:
-            log("Failed to initialise pygame")
+        pygame.init()
+        self.pygame = pygame
         self.system = System(self)
         self.width, self.height = resolution
         self.mode = mode
@@ -74,42 +71,38 @@ class Game(object):
         pygame.quit()
 
     def initialise_screen(self, resolution=None, mode=None):
-        """(Re)initialises the screen using the given arguments."""
-        try:
-            if resolution is None:
-                resolution = (self.width, self.height)
-            if mode is None:
-                mode = self.mode
-            flags = pygame.HWSURFACE | pygame.DOUBLEBUF
-            if mode == "fullscreen":
-                flags |= pygame.FULLSCREEN
-            elif mode == "windowed":
-                os.environ["SDL_VIDEO_CENTERED"] = "1"
-            elif mode == "borderless":
-                os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
-                flags |= pygame.NOFRAME
-            else:
-                raise ValueError("Unknown mode for reinitialise_screen(): \" %s \"" % mode)
+        """(Re)initialise the screen using the given resolution and mode."""
+        if resolution is None:
+            resolution = (self.width, self.height)
+        if mode is None:
+            mode = self.mode
+        flags = pygame.HWSURFACE | pygame.DOUBLEBUF
+        if mode == "fullscreen":
+            flags |= pygame.FULLSCREEN
+        elif mode == "windowed":
+            os.environ["SDL_VIDEO_CENTERED"] = "1"
+        elif mode == "borderless":
+            os.environ["SDL_VIDEO_WINDOW_POS"] = "0,0"
+            flags |= pygame.NOFRAME
+        else:
+            raise ValueError("Unknown mode for reinitialise_screen(): '{}'".format(mode))
 
-            self.screen = pygame.display.set_mode(resolution, flags)
-            self.width, self.height = resolution
-            self.mode = mode
-        except Exception:
-            log("Failed to reinitialise screen in ", mode, " mode "
-                     "at ", self.width, "x", self.height, " resolution")
+        self.screen = pygame.display.set_mode(resolution, flags)
+        self.width, self.height = resolution
+        self.mode = mode
 
     def display(self, image, coordinates, area=None, special_flags=0):
-        """Takes coordinates and area for a 1920x1080 window"""
-        try:
-            x_scale = self.width/1920.0
-            y_scale = self.height/1080.0
-            coordinates = (coordinates[0]*x_scale, coordinates[1]*y_scale)
-            if area is not None:
-                area = (area[0]*x_scale, area[1]*y_scale,
-                        area[2]*x_scale, area[3]*y_scale)
-            self.screen.blit(image, coordinates, area, special_flags)
-        except Exception:
-            log("Failed to display image at ", coordinates)
+        """Display the given image at the given coordinates.
+
+        Coordinates and area should be givenas if they were for a 1920x1080 window.
+        """
+        x_scale = self.width/1920.0
+        y_scale = self.height/1080.0
+        coordinates = (coordinates[0]*x_scale, coordinates[1]*y_scale)
+        if area is not None:
+            area = (area[0]*x_scale, area[1]*y_scale,
+                    area[2]*x_scale, area[3]*y_scale)
+        self.screen.blit(image, coordinates, area, special_flags)
 
     def _inputs(self):
         self.input.reset()
@@ -131,29 +124,22 @@ class Game(object):
 
     def _update(self):
         self.frame += 1
-        try:
-            pygame.display.flip()   # Updating the screen
-            self.clock.tick(self.fps)    # [fps] times per second
-        except Exception:
-            log("Failed to update screen")
+        pygame.display.flip()   # Updating the screen
+        self.clock.tick(self.fps)    # [fps] times per second
 
-    def runtime(self):
-        try:
-            return time.time() - self.start_time
-        except Exception:
-            log("Failed to calculate and return game run time")
+    def runtime(self) -> float:
+        """Return the amount of time the game has been running for in seconds."""
+        return time.time() - self.start_time
 
     def _check_quit(self):
         if self.quit_condition():
             self.running = False
 
     def run(self):
+        """Run the game."""
         self.running = True
-        try:
-            self.clock = pygame.time.Clock()
-            self.start_time = time.time()
-        except Exception:
-            log("Failed to initialise essential time related display variables")
+        self.clock = pygame.time.Clock()
+        self.start_time = time.time()
 
         while self.running:
             self._inputs()

@@ -19,48 +19,46 @@ class DebugConsole(object):
                  error_output_colour=(255, 0, 0),  # red
                  prompt="> "):
         self.game = game
-        try:
-            self.text_input = _TextInput(self.game)
 
-            self.max_command_length = max_command_length
-            # Maybe remove this and make it so commands just can't go off the screen
+        self.text_input = _TextInput(self.game)
 
-            self.active = False     # Whether the console is open
-            self.toggle_active_hotkey = _Hotkey(self.game, "`").pressed
+        self.max_command_length = max_command_length
+        # Maybe remove this and make it so commands just can't go off the screen
 
-            self.font = self.game.pygame.font.SysFont(font_name, font_size)
-            self.input_colour = input_colour    # white
+        self.active = False     # Whether the console is open
+        self.toggle_active_hotkey = _Hotkey(self.game, "`").pressed
 
-            # Placeholder
-            font = self.game.pygame.font.SysFont(font_name, font_size, italic=True)
-            self.placeholder_text = font.render(placeholder_text, True, placeholder_colour)
+        self.font = self.game.pygame.font.SysFont(font_name, font_size)
+        self.input_colour = input_colour    # white
 
-            self.output_display_time = output_display_time
-            self.output_start_frame = -self.output_display_time * self.game.fps
-            self.default_output_colour = default_output_colour
-            self.error_output_colour = error_output_colour
-            self.saved_input = ""
-            self.default_output = self.font.render("", True, self.default_output_colour)
-            self.output = self.default_output
+        # Placeholder
+        font = self.game.pygame.font.SysFont(font_name, font_size, italic=True)
+        self.placeholder_text = font.render(placeholder_text, True, placeholder_colour)
 
-            # Prompt
-            self.prompt = self.font.render(prompt, True, self.input_colour)
+        self.output_display_time = output_display_time
+        self.output_start_frame = -self.output_display_time * self.game.fps
+        self.default_output_colour = default_output_colour
+        self.error_output_colour = error_output_colour
+        self.saved_input = ""
+        self.default_output = self.font.render("", True, self.default_output_colour)
+        self.output = self.default_output
 
-            prompt_width = self.prompt.get_width()
-            text_height = self.prompt.get_height()
-            self.prompt_coordinates = (0, game.height - text_height)
-            self.input_coordinates = (self.prompt_coordinates[0] + prompt_width,
-                                      self.prompt_coordinates[1])
-            self.output_coordinates = (0, game.height - 2*text_height)
+        # Prompt
+        self.prompt = self.font.render(prompt, True, self.input_colour)
 
-            # Previous commands
-            self.current_command = ""
-            self.using_previous_commands = False
-            self.command_index = 0
-            self.previous_hotkey = _Hotkey(self.game, "up").pressed
-            self.next_hotkey = _Hotkey(self.game, "down").pressed
-        except Exception:
-            self.game.log("Failed to initialise debug console object")
+        prompt_width = self.prompt.get_width()
+        text_height = self.prompt.get_height()
+        self.prompt_coordinates = (0, game.height - text_height)
+        self.input_coordinates = (self.prompt_coordinates[0] + prompt_width,
+                                  self.prompt_coordinates[1])
+        self.output_coordinates = (0, game.height - 2*text_height)
+
+        # Previous commands
+        self.current_command = ""
+        self.using_previous_commands = False
+        self.command_index = 0
+        self.previous_hotkey = _Hotkey(self.game, "up").pressed
+        self.next_hotkey = _Hotkey(self.game, "down").pressed
 
     def activate(self):
         """Marks console as active."""

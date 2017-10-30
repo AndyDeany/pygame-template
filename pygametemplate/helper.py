@@ -1,15 +1,9 @@
 """Module containing helper functions for using pygame."""
-from pygametemplate import log
-
-
 def load_class_assets(calling_object, assets_dict):
     """Load class assets. Only call if class_assets_loaded is False."""
-    try:
-        for attribute_name in assets_dict:
-            calling_class = calling_object.__class__
-            setattr(calling_class, attribute_name, assets_dict[attribute_name])
-    except Exception:
-        log("Failed to load ", calling_class.__name__, " class assets")
+    calling_class = type(calling_object)
+    for attribute_name in assets_dict:
+        setattr(calling_class, attribute_name, assets_dict[attribute_name])
     setattr(calling_class, "class_assets_loaded", True)
 
 def wrap_text(text, font, max_width):
@@ -45,10 +39,5 @@ def wrap_text(text, font, max_width):
         lines.append(line)
         return lines
 
-    try:
-        paragraphs = text.split("\n")
-        return sum(map(wrap_paragraph, paragraphs), [])
-    except Exception as error:
-        fatal = not isinstance(error, ValueError)
-        log("Failed to wrap text: \"", text, "\"", fatal=fatal)
-        return ["error"]
+    paragraphs = text.split("\n")
+    return sum(map(wrap_paragraph, paragraphs), [])

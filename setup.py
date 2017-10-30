@@ -1,7 +1,7 @@
 from setuptools import setup
 
 
-version = "0.6.0"
+version = "0.6.1"
 url = "https://github.com/AndyDeany/pygame-template"
 
 with open("requirements.txt", "r") as requirements_file:
@@ -25,9 +25,9 @@ setup(
         "Natural Language :: English",
         "Topic :: Software Development :: Libraries :: pygame",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
     )
 )
