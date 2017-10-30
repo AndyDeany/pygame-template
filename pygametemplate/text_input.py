@@ -63,29 +63,26 @@ class TextInput(object):
         setattr(TextInput, "active", False)
 
     def display(self, font, colour, coordinates, antialias=True, background=None):
-        try:
-            if background is None:
-                self.game.screen.blit(font.render(self.text, antialias, colour),
-                                      coordinates)
-            else:
-                self.game.screen.blit(font.render(self.text, antialias, colour, background),
-                                      coordinates)
+        if background is None:
+            self.game.screen.blit(font.render(self.text, antialias, colour),
+                                  coordinates)
+        else:
+            self.game.screen.blit(font.render(self.text, antialias, colour, background),
+                                  coordinates)
 
-            # Blinking cursor at end of text when text field is focused
-            self.update_cursor_moved_recently()
-            if (self.focused and
-                    (self.cursor_moved_recently or
-                     self.game.frame % self.game.fps < self.game.fps/2)):
-                # Above condition means 0.5s displaying, 0.5s not displaying
-                self.game.screen.blit(
-                    font.render("|", True, colour),
-                    (coordinates[0]
-                     + font.size(self.text[:self.cursor_position])[0]
-                     - font.size(" ")[0]/2,     # Fixes cursor showing too far away from text
-                     coordinates[1])
-                )
-        except Exception:
-            log("Failed to display text input")
+        # Blinking cursor at end of text when text field is focused
+        self.update_cursor_moved_recently()
+        if (self.focused and
+                (self.cursor_moved_recently or
+                 self.game.frame % self.game.fps < self.game.fps/2)):
+            # Above condition means 0.5s displaying, 0.5s not displaying
+            self.game.screen.blit(
+                font.render("|", True, colour),
+                (coordinates[0]
+                 + font.size(self.text[:self.cursor_position])[0]
+                 - font.size(" ")[0]/2,     # Fixes cursor showing too far away from text
+                 coordinates[1])
+            )
 
     def check_focused(self, x, y, width, height):
         """
@@ -162,33 +159,29 @@ class TextInput(object):
     def receive_single_characters(self, event):
         if self.active:
             active_instance = self.active_instance()
-            try:
-                if not (active_instance.game.input.buttons["leftctrl"].held or
-                        active_instance.game.input.buttons["rightctrl"].held or
-                        active_instance.game.input.buttons["alt"].held):
-                    if event.key == 8:  # Backspace
-                        active_instance.delete_character("previous")
-                    elif event.key == 127:  # Delete
-                        active_instance.delete_character("following")
-                    elif event.key in [13, 271]:    # Enter and numpad enter
-                        active_instance.disable()
-                    # Moving blinking cursor
-                    elif event.key == 275:  # Right arrow key
-                        if active_instance.cursor_position != len(active_instance.text):
-                            active_instance.set_cursor_position(active_instance.cursor_position + 1)
-                    elif event.key == 276:  # Left arrow key
-                        if active_instance.cursor_position != 0:
-                            active_instance.set_cursor_position(active_instance.cursor_position - 1)
-                    elif event.key == 278:  # Home key
-                        active_instance.set_cursor_position(0)
-                    elif event.key == 279:  # End key
-                        active_instance.set_cursor_position(len(active_instance.text))
-                    # Inserting new characters
-                    elif len(active_instance.text) < active_instance.max_characters:
-                        active_instance.insert_character(event.unicode)
-            except Exception:
-                log("Failed to receive input from a key press"
-                    "[event.key = ", event.key, "]")
+            if not (active_instance.game.input.buttons["leftctrl"].held or
+                    active_instance.game.input.buttons["rightctrl"].held or
+                    active_instance.game.input.buttons["alt"].held):
+                if event.key == 8:  # Backspace
+                    active_instance.delete_character("previous")
+                elif event.key == 127:  # Delete
+                    active_instance.delete_character("following")
+                elif event.key in [13, 271]:    # Enter and numpad enter
+                    active_instance.disable()
+                # Moving blinking cursor
+                elif event.key == 275:  # Right arrow key
+                    if active_instance.cursor_position != len(active_instance.text):
+                        active_instance.set_cursor_position(active_instance.cursor_position + 1)
+                elif event.key == 276:  # Left arrow key
+                    if active_instance.cursor_position != 0:
+                        active_instance.set_cursor_position(active_instance.cursor_position - 1)
+                elif event.key == 278:  # Home key
+                    active_instance.set_cursor_position(0)
+                elif event.key == 279:  # End key
+                    active_instance.set_cursor_position(len(active_instance.text))
+                # Inserting new characters
+                elif len(active_instance.text) < active_instance.max_characters:
+                    active_instance.insert_character(event.unicode)
 
     character_keys = (  # Keys that alter the appearance of self.text when it is displayed
         [n for n in range(44, 58)]
@@ -200,14 +193,11 @@ class TextInput(object):
     @classmethod
     def receive_multiple_characters(self):
         if self.active:
-            try:
-                if self.is_a_repeat_frame() and self.character_keys_held() == 1:
-                    button = next((button for button in self.game.input.buttons.values()
-                                   if button.held and button.number in self.character_keys))
-                    if button.time_held() > 0.5:
-                        self.receive_single_characters(button.event)
-            except Exception:
-                log("Failed to receive text input from held keys")
+            if self.is_a_repeat_frame() and self.character_keys_held() == 1:
+                button = next((button for button in self.game.input.buttons.values()
+                               if button.held and button.number in self.character_keys))
+                if button.time_held() > 0.5:
+                    self.receive_single_characters(button.event)
 
     @classmethod
     def character_keys_held(self):
