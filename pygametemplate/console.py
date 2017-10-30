@@ -4,7 +4,7 @@ from pygametemplate.hotkey import Hotkey
 
 class Console(object):
 
-    def __init__(self, game, toggle_fps_hotkey=None):
+    def __init__(self, game, *, toggle_fps_hotkey=None):
         """Create a Console instance.
 
         `toggle_fps_hotkey` defaults to Ctrl+F.
