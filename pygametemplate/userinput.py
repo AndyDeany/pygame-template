@@ -69,29 +69,18 @@ class Input(object):
             button.reset()
 
     def buttondown(self, event):
-        try:
-            if hasattr(event, "key"):
-                number = event.key
-            else:
-                number = event.button
-            button = next((button for button in self.buttons.values() if button.number == number))
-            button.press()
-            button.event = event
-        except Exception:
-            log("Failed to process a button being pressed "
-                "[event number=", number, "]")
+        if hasattr(event, "key"):
+            number = event.key
+        else:
+            number = event.button
+        button = next((button for button in self.buttons.values() if button.number == number))
+        button.press()
+        button.event = event
 
     def buttonup(self, number):
-        try:
-            next((button for button in self.buttons.values() if button.number == number)).release()
-        except Exception:
-            log("Failed to process a button being released [event number=", number, "]")
+        next((button for button in self.buttons.values() if button.number == number)).release()
 
     def mousein(self, x, y, width, height):
         """Determines if the mouse is in the given rectangle."""
-        try:
-            return (x < self.mouse_pos[0] < x + width and
-                    y < self.mouse_pos[1] < y + height)
-        except Exception:
-            log("Unable to determine whether mouse position meet the requirements ",
-                x, " < x < ", x + width, ", ", y, " < y <  ", y + height)
+        return (x < self.mouse_pos[0] < x + width and
+                y < self.mouse_pos[1] < y + height)
