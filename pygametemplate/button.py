@@ -27,7 +27,8 @@ class Button(object):
         self.pressed = 0
         self.released = 0
 
-    def time_held(self):
+    def time_held(self) -> float:
+        """Return the amount of time this button has been held for in seconds."""
         if self.held:
             return time.time() - self.press_time
         else:
