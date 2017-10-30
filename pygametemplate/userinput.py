@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from pygametemplate import log
 from pygametemplate.button import Button
 
