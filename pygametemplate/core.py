@@ -22,9 +22,8 @@ def path_to(*path):
 
 LOG_FILE = path_to("log.txt")
 
-def log(*error_message, **options):
+def log(*error_message, fatal=True):
     """Takes 1 or more variables and concatenates them to create the error message."""
-    fatal = options.get("fatal", True)  # `fatal` option defaults to True
     error_message = "".join(map(str, error_message))
     with open(LOG_FILE, "a", encoding="utf-8") as log_file:
         log_file.write("{} - {}.\n".format(datetime.utcnow(), error_message))
