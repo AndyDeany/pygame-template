@@ -71,7 +71,7 @@ class Game(object):
         pygame.quit()
 
     def initialise_screen(self, resolution=None, mode=None):
-        """(Re)initialises the screen using the given arguments."""
+        """(Re)initialise the screen using the given resolution and mode."""
         if resolution is None:
             resolution = (self.width, self.height)
         if mode is None:
@@ -92,7 +92,10 @@ class Game(object):
         self.mode = mode
 
     def display(self, image, coordinates, area=None, special_flags=0):
-        """Takes coordinates and area for a 1920x1080 window"""
+        """Display the given image at the given coordinates.
+
+        Coordinates and area should be givenas if they were for a 1920x1080 window.
+        """
         x_scale = self.width/1920.0
         y_scale = self.height/1080.0
         coordinates = (coordinates[0]*x_scale, coordinates[1]*y_scale)
@@ -124,7 +127,8 @@ class Game(object):
         pygame.display.flip()   # Updating the screen
         self.clock.tick(self.fps)    # [fps] times per second
 
-    def runtime(self):
+    def runtime(self) -> float:
+        """Return the amount of time the game has been running for in seconds."""
         return time.time() - self.start_time
 
     def _check_quit(self):
@@ -132,6 +136,7 @@ class Game(object):
             self.running = False
 
     def run(self):
+        """Run the game."""
         self.running = True
         self.clock = pygame.time.Clock()
         self.start_time = time.time()
