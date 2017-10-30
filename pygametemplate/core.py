@@ -56,8 +56,8 @@ def load_image(image_name, fix_alphas=True, file_extension=".png"):
         try:
             image = pygame.image.load(image_path)
         except PygameError:
-            raise IOError
-    except IOError:
+            raise FileNotFoundError
+    except FileNotFoundError:
         log("Image file not found: ", image_name, file_extension)
 
     if fix_alphas:
@@ -70,5 +70,5 @@ def load_font(font_name, font_size, file_extension=".ttf"):
     font_path = path_to("assets/fonts", font_name + file_extension)
     try:
         return pygame.font.Font(font_path, font_size)
-    except IOError:
+    except FileNotFoundError:
         log("Font file not found: ", font_name, file_extension)

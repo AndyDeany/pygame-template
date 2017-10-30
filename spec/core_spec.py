@@ -34,7 +34,7 @@ with description("pygametemplate.core"):
     with context(".log()"):
         try:
             os.remove("log.txt")    # Clean starting environment
-        except OSError:   # TODO: Change to FileNotFoundError (python3 only)
+        except FileNotFoundError:
             pass
 
         with it("should log a non-fatal error correctly"):
