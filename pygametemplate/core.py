@@ -52,12 +52,10 @@ def load_image(image_name, fix_alphas=True, file_extension=".png"):
     # depending on the player's resolution settings.
     image_path = path_to("assets/images", image_name + file_extension)
     try:
-        try:
-            image = pygame.image.load(image_path)
-        except PygameError:
-            raise FileNotFoundError
-    except FileNotFoundError:
-        log("Image file not found: ", image_name, file_extension)
+        image = pygame.image.load(image_path)
+    except PygameError:
+        msg = "Image file not found: {}{}".format(image_name, file_extension)
+        raise FileNotFoundError(msg)
 
     if fix_alphas:
         return image.convert_alpha()  # Fixes per pixel alphas permanently
@@ -70,4 +68,5 @@ def load_font(font_name, font_size, file_extension=".ttf"):
     try:
         return pygame.font.Font(font_path, font_size)
     except FileNotFoundError:
-        log("Font file not found: ", font_name, file_extension)
+        msg = "Font file not found: {}{}".format(font_name, file_extension)
+        raise FileNotFoundError(msg)

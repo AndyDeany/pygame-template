@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.1
+
+* Remove some silly `try`/`except` blocks.
+This means that fewer `pygametemplate.CaughtFatalException`s will be raised,
+as the actual raised exceptions will be raised in their place.
+
+* Add some missing docstrings and function annotations.
+
+
 ## 0.6.0
 
 First pypi release.
@@ -12,6 +21,7 @@ Remove Python 2 support.
 
 * `pygametemplate.core.load_image()` now raises a `FileNotFoundError` instead
 of an `IOError` when an image file with the given name can't be found.
+
 
 ## 0.5.0
 
@@ -53,6 +63,7 @@ Currently, doing this enables the following behaviour:
 
     * `core.log()` will not open a popup window on fatal errors.
     This is because interacting with this window from automated tests is very difficult.
+
 
 ## 0.4.0
 
