@@ -14,3 +14,12 @@ install:
   - pip install -r test_requirements.txt
 script:
   - mamba --format documentation
+
+deploy:
+  on:
+    tags: true
+  provider: pypi
+  distributions: bdist_wheel
+  user: AndyDeany
+  password:
+    secure: "fjPsXqdDJRoVSfGymJUfLXSLiroJgCEHvPNjU8wcRacZaIeGlTH1qGedC7GC5WXaFrzbJi5ygujKcnvk1070ntTNURKPSWjeARJSBS69cGXzhh9UKa+8qeSwFWZ9VOHsPzcIYqhdmwhhuFjcI46SviC4p+tolr06AIj7bTeq0KnQZYAcMpopwdffqBDDTm2JwxyT6di7CeSNj8eHJxVLahp+vmTfTIA21DHGAb184yThvrzh9o+Vxn1xorKf+qc1WHyoFgzIYltBWVOftkVnXxtX1S+L7AZ1lYx5yDNVw/d/82psbr8vdn5v53kqNeXnyY02nR2RWFE+J1qdfC4bF+FP0FyYY74qP7h77ZxHQs/7VTXiL7HYiBoKwAl6YJKA3wKGk0Ka3qUim32k1yakg4ymInRcOwVkxf74BY5G6xzJrFpZZrBnjL9DAaYTa4Ih9sAyXEV1r3qbVFBwbi2NMUeOpwUppcUf/nKh6/9kPSJ9FaASOxVfILMA3QQP0smVu3gMspQd0kgxBi2R9/xwouQkEmx4Z4ua5zDxQtbqHDldSKtJaNH0SiY338LqL8F6tJmOEUuCZ0X6S0Zwf3NSLSathvUM+C06jnaeMgakTdAC3L6o/IlXDa98Zk8JZDde7R4eEGbEkQbmedzjqJRsOPNyNgew8dyl+Sx09C7/iso="

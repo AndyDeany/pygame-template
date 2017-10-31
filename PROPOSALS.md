@@ -1,13 +1,18 @@
 # Pygame template proposals
 
-## Minor
+## Patch
 
-* `Image` class with an `Image.display(surface: pygame.Surface)` method,
-along with loading and unloading from RAM.
+* Don't pass `game` to classes which don't use it.
+
+* Add `.pylintrc` file and fix issues.
+
+
+## Minor
 
 * Remove `Game().pygame` member if possible and just import pygame where needed.
 
-* Add parameters of `Game.__init__()` for setting the caption and icon of the game.
+* Possibly remove `load_image()` and move the code to `Image.load()`.
+Is there a reason to ever use `load_image()` over the `Image` class?
 
 ## Major
 

@@ -17,16 +17,23 @@ from pygametemplate.hotkey import Hotkey
 from pygametemplate.text_input import TextInput
 
 
-class Game(object):
-    def __init__(self, StartingView, resolution=(1280, 720), mode="windowed"):
+class Game:
+
+    def __init__(self, StartingView, resolution=(1280, 720), mode="windowed",
+                 *, caption="Insert name here v0.1.0", icon=None):
+        """Create a new Game object.
+
+        `icon` should be the name of an .ico file, without the extension.
+        """
         pygame.init()
         self.pygame = pygame
         self.system = System(self)
         self.width, self.height = resolution
         self.mode = mode
         self.initialise_screen()
-        pygame.display.set_caption("insertnamehere (Alpha 1.0)")
-        #! pygame.display.set_icon(load_image("icon_name", file_extension=".ico"))
+        pygame.display.set_caption(caption)
+        if icon is not None:
+            pygame.display.set_icon(load_image(icon, file_extension=".ico"))
 
         self.last_view = None
         self.current_view = StartingView(self)

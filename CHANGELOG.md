@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.7.0
+
+* `pygametemplate.Game.__init__()` now optionally takes
+`caption` and `icon` arguments.
+	* `caption` specifies the caption (window title) at the top of the game window.
+
+	* `icon` should be the name of a `.ico` file
+	which will be used as the game window's icon.
+	For example, if you have a `assets/images/tree.ico` file,
+	you would pass in `icon="tree"`.
+	These must be passed in as keyword arguments.
+
+* There is now a new `pygametemplate.Image` class,
+which helps with keeping RAM taken by images in check.
+Instances of `Image` have the following methods:
+	* `Image.__init__(image_name)`: Takes the name of the image.
+	For example, if your image file is `assets/images/heart.png`,
+	pass in `"heart"`.
+
+	* `Image.load()`: Load the image's `pygame.Surface` object into RAM.
+	Minimal RAM will be used before this method is called.
+
+	* `Image.unload()`: Unload the image's `pygame.Surface` object from RAM.
+	This will clear up almost all usage of RAM by the `Image` instance.
+
+	* `Image.display(surface: pygame.Surface, coordinates, area=None, special_flags=0)`:
+	Display the image on the given `surface`. The arguments other than `surface`
+	are the same as the arguments passed to `pygame.Surface.blit()`.
+
+
 ## 0.6.1
 
 * Remove some silly `try`/`except` blocks.
