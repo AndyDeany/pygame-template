@@ -4,6 +4,8 @@
 
 * Don't pass `game` to classes which don't use it.
 
+* Add `.pylintrc` file and fix issues.
+
 
 ## Minor
 
