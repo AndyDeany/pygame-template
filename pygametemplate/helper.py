@@ -17,7 +17,7 @@ def wrap_text(text, font, max_width):
             return font.size(string)[0] > max_width
 
         def raise_word_too_long_error(word):
-            raise ValueError("\"%s\" is too long to be wrapped." % word)
+            raise ValueError(f"'{word}' is too long to be wrapped.")
 
         lines = []
         words = paragraph.split()
