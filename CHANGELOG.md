@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0
+
+* Rename the `pygametemplate.game`, `pygametemplate.view`, and `pygametemplate.image`
+modules to `_game`, `_view` and `_image` respectively.
+These modules shouldn't be imported from anyway, as their members
+are available as direct members of `pygametemplate`.
+
+
 ## 0.7.0
 
 * `pygametemplate.Game.__init__()` now optionally takes

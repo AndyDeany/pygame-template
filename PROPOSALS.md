@@ -6,9 +6,6 @@
 
 * Add `.pylintrc` file and fix issues.
 
-* Make submodules private (`game` -> `_game`, for example).
-This can otherwise cause confusion on import.
-
 
 ## Minor
 
