@@ -1,4 +1,4 @@
-from pygametemplate.game import Game
+from pygametemplate import Game
 
 
 class ExampleGame(Game):

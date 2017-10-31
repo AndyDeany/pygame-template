@@ -1,4 +1,4 @@
-from pygametemplate.view import View
+from pygametemplate import View
 
 
 class ExampleView(View):
