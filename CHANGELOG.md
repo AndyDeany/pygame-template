@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0
+
+* `pygametemplate.Game.__init__()` now optionally takes `caption` and `icon_name`.
+`caption` specifies the caption (window title) at the top of the game window.
+`icon_name` should be the name of a `.ico` file which will be used as the game window's icon.
+For example, if you have a `assets/images/tree.ico` file, you would pass in `icon="tree"`.
+These must be passed in as keyword arguments.
+
+
 ## 0.6.1
 
 * Remove some silly `try`/`except` blocks.
