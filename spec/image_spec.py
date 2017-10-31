@@ -7,8 +7,8 @@ from pygametemplate import Image
 
 with description("pygametemplate.Image"):
     with it("should initialise correctly, without loading a Surface object"):
-        self.image = Image("test")
-        expect(self.image.name).to(equal("test"))
+        self.image = Image("test.png")
+        expect(self.image.file).to(equal("test.png"))
         expect(self.image.image).to(be(None))
 
     with it("should be able to load its image Surface into RAM"):

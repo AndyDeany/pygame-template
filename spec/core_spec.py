@@ -67,25 +67,25 @@ with description("pygametemplate.core"):
             self.check_images_equal = check_images_equal
 
         with it("should load a .png image correctly"):
-            image = load_image("test")
+            image = load_image("test.png")
             test_png_path = path_to("assets/images/test.png")
             expected_image = pygame.image.load(test_png_path).convert_alpha()
             self.check_images_equal(image, expected_image)
 
         with it("should load a .ico image correctly"):
-            image = load_image("test", file_extension=".ico")
+            image = load_image("test.ico")
             test_ico_path = path_to("assets/images/test.ico")
             expected_image = pygame.image.load(test_ico_path).convert_alpha()
             self.check_images_equal(image, expected_image)
 
         with it("should load a non-fixed-alphas .png image correctly"):
-            image = load_image("test", fix_alphas=False)
+            image = load_image("test.png", fix_alphas=False)
             test_png_path = path_to("assets/images/test.png")
             expected_image = pygame.image.load(test_png_path).convert()
             self.check_images_equal(image, expected_image)
 
         with it("should raise an error when the given image name isn't found"):
-            expect(lambda: load_image("non_existant")).to(raise_error(IOError))
+            expect(lambda: load_image("non_existant.png")).to(raise_error(IOError))
 
     with context(".load_font()"):
         with before.all:
