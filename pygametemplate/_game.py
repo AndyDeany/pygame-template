@@ -23,7 +23,7 @@ class Game:
                  *, caption="Insert name here v0.1.0", icon=None):
         """Create a new Game object.
 
-        `icon` should be the name of an .ico file, without the extension.
+        `icon` should be the name of an image file.
         """
         pygame.init()
         self.pygame = pygame
@@ -33,7 +33,7 @@ class Game:
         self.initialise_screen()
         pygame.display.set_caption(caption)
         if icon is not None:
-            pygame.display.set_icon(load_image(icon, file_extension=".ico"))
+            pygame.display.set_icon(load_image(icon))
 
         self.last_view = None
         self.current_view = StartingView(self)

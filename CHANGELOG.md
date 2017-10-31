@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.0
+
+* Rename the `pygametemplate.game`, `pygametemplate.view`, and `pygametemplate.image`
+modules to `_game`, `_view` and `_image` respectively.
+These modules shouldn't be imported from anyway, as their members
+are available as direct members of `pygametemplate`.
+
+* `pygametemplate.load_image()` now expects the name of the image file
+**including** the file extension, not excluding it, as was the case before.
+The same goes for `pygametemplate.Image.__init__()`,
+and for the `icon` argument of `pygametemplate.Game`.
+
+
 ## 0.7.0
 
 * `pygametemplate.Game.__init__()` now optionally takes

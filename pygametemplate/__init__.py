@@ -1,5 +1,5 @@
 """pygametemplate module for making creating games with Pygame easier."""
 from pygametemplate.core import log, load_image, load_font
-from pygametemplate.image import Image
-from pygametemplate.game import Game
-from pygametemplate.view import View
+from pygametemplate._image import Image
+from pygametemplate._game import Game
+from pygametemplate._view import View

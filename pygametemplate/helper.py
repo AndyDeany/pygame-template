@@ -6,6 +6,7 @@ def load_class_assets(calling_object, assets_dict):
         setattr(calling_class, attribute_name, assets_dict[attribute_name])
     setattr(calling_class, "class_assets_loaded", True)
 
+
 def wrap_text(text, font, max_width):
     """
     Returns an array of lines which can be blitted beneath each other
