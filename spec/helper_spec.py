@@ -22,11 +22,13 @@ with description("pygametemplate.helper"):
                     "Maecenas dictum gravida nulla non blandit.")
             lines = wrap_text(text, font, 200)
             for index, line in enumerate(lines):
-                expect(font.size(line)[0]).to(be_below_or_equal(200))   # Line not too long
+                # Check that the line isn't too long
+                expect(font.size(line)[0]).to(be_below_or_equal(200))
                 if not index + 1 == len(lines):
+                    # Check that the line is as long as it could be
                     next_word = lines[index+1].split()[0]
                     joined_width = font.size(" ".join((line, next_word)))[0]
-                    expect(joined_width).to(be_above(200))    # Line not too short
+                    expect(joined_width).to(be_above(200))
 
         with it("should create a forced newline wherever \\n is present in the text"):
             text = "Lorem\nipsum\ndolor\nsit\namet."
