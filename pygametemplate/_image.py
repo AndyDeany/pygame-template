@@ -4,13 +4,13 @@ from pygametemplate import load_image
 
 class Image:
 
-    def __init__(self, image_name):
-        self.name = image_name
+    def __init__(self, image_file_name):
+        self.file = image_file_name
         self.image = None
 
     def load(self):
         """Load the image into RAM."""
-        self.image = load_image(self.name)
+        self.image = load_image(self.file)
 
     def unload(self):
         """Unload the image from RAM."""

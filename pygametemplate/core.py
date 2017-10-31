@@ -41,20 +41,18 @@ def log(*error_message, fatal=True):
 
 
 # Asset loading
-def load_image(image_name, fix_alphas=True, file_extension=".png"):
-    """Load the image with the given `image_name` (excluding file extension).
+def load_image(file_name, fix_alphas=True):
+    """Load the image from the file with the given `file_name`.
 
-    Setting `fix_alphas` to False enables the image to be able to fade.
-    A different file extension can be specified via the
-    `file_extension` keyword argument, which defaults to ".png".
+    Setting `fix_alphas` to False allows the image to be able to fade.
     """
     # TODO: Add stuff for loading images of the correct resolution
     # depending on the player's resolution settings.
-    image_path = path_to("assets/images", image_name + file_extension)
+    image_path = path_to("assets/images", file_name)
     try:
         image = pygame.image.load(image_path)
     except PygameError:
-        msg = "Image file not found: {}{}".format(image_name, file_extension)
+        msg = "Image file not found: {}".format(file_name)
         raise FileNotFoundError(msg)
 
     if fix_alphas:
