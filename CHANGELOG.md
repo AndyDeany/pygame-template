@@ -1,5 +1,15 @@
 # Changelog
 
+
+## 0.9.0
+
+* Rename `Game.quit()` to `Game.on_quit()` and make it optional to implement.
+If you want to add custom functionality, you can now define the `on_quit()`
+method on your `Game` subclass.
+
+* Add new `Game.quit()` method which signals the game to exit.
+
+
 ## 0.8.0
 
 * Rename the `pygametemplate.game`, `pygametemplate.view`, and `pygametemplate.image`

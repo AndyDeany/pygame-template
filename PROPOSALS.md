@@ -37,10 +37,6 @@ Is there a reason to ever use `load_image()` over the `Image` class?
 for icon loading, as this is the only real place an image file is used
 for something other than blitting to a surface.
 
-* Rename `Game.quit()` to `Game.on_quit()`, and make it optional.
-This might be the same for other methods. Then add a `Game.quit()` method
-which just does `self.running = False`.
-
 
 ## Major
 
