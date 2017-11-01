@@ -58,8 +58,12 @@ class Game:
     def draw(self):
         raise NotImplementedError
 
+    def on_quit(self):
+        pass
+
     def quit(self):
-        raise NotImplementedError
+        """Signal the game to quit."""
+        self.running = False
 
     def _logic(self):
         self._check_quit()
@@ -74,7 +78,7 @@ class Game:
         self.console.draw()
 
     def _quit(self):
-        self.quit()
+        self.on_quit()
         pygame.quit()
 
     def initialise_screen(self, resolution=None, mode=None):
@@ -115,7 +119,7 @@ class Game:
         self.input.reset()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.running = False
+                self.quit()
             elif event.type == pygame.MOUSEMOTION:
                 self.input.mouse_pos = event.pos
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -140,7 +144,7 @@ class Game:
 
     def _check_quit(self):
         if self.quit_condition():
-            self.running = False
+            self.quit()
 
     def run(self):
         """Run the game."""
