@@ -58,7 +58,7 @@ class Game:
         View = self.get_view_class(view_name)
         self.current_view = View(self)
 
-    def get_view_class(view_name: str):
+    def get_view_class(self, view_name: str):
         """Return the View class with the given view_name."""
         return getattr(import_module(self.VIEW_MODULE), view_name)
 
