@@ -17,6 +17,9 @@ from pygametemplate.hotkey import Hotkey
 from pygametemplate.text_input import TextInput
 
 
+pygame.init()
+
+
 class Game:
 
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed",
@@ -25,7 +28,6 @@ class Game:
 
         `icon` should be the name of an image file.
         """
-        pygame.init()
         self.pygame = pygame
         self.system = System(self)
         self.width, self.height = resolution
