@@ -1,5 +1,6 @@
 import os
 import time
+from importlib import import_module
 
 import pygame
 try:
@@ -21,6 +22,8 @@ pygame.init()
 
 
 class Game:
+
+    VIEW_MODULE = "lib.views"
 
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed",
                  *, caption="Insert name here v0.1.0", icon=None):
@@ -48,11 +51,16 @@ class Game:
 
         self.quit_condition = Hotkey(self, "f4", alt=True).pressed
 
-    def set_view(self, View):
-        """Set the current view to the given View class."""
+    def set_view(self, view_name: str):
+        """Set the current view to the View class with the given name."""
         self.last_view = self.current_view
         self.last_view.unload()
+        View = self.get_view_class(view_name)
         self.current_view = View(self)
+
+    def get_view_class(view_name: str):
+        """Return the View class with the given view_name."""
+        return getattr(import_module(self.VIEW_MODULE), view_name)
 
     def logic(self):
         raise NotImplementedError
