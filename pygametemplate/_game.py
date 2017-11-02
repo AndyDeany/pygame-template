@@ -55,7 +55,7 @@ class Game:
         """Set the current view to the View class with the given name."""
         self.last_view = self.current_view
         self.last_view.unload()
-        View = self.get_view_class(view_name)
+        View = self.get_view_class(view_name)   # pylint: disable=invalid-name
         self.current_view = View(self)
 
     def get_view_class(self, view_name: str):
