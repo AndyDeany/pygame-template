@@ -1,6 +1,20 @@
 # Changelog
 
 
+## 0.8.2
+
+* Change `Game.set_view()` to take `view_name: str` instead of
+`View: pygametemplate.View`, as taking a `View` class meant that
+other `View` classes needed to import each other, which was causing
+circular imports, and thus erroring code. This was considered to be a bug as
+views could not switch between each other before. `View` classes are now expected
+to be members of the `lib.views` module in your project. You can change this
+by setting the `VIEW_MODULE` attribute of your `Game` subclass.
+Alternatively, you can override the `Game.get_view_class(view_name: str)`
+method of your `Game` subclass to have your own custom
+view name -> View class conversion functionality.
+
+
 ## 0.8.1
 
 * Fix a bug where using `pygame` functions in your `StartingView`
