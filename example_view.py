@@ -1,7 +1,11 @@
-from pygametemplate import View
+from pygametemplate import View, load_font
 
 
 class ExampleView(View):
+
+    font = load_font("test", 20)
+    background_colour = (0, 0, 0)
+    text_colour = (255, 255, 255)
 
     def load(self):
         pass
@@ -10,7 +14,7 @@ class ExampleView(View):
         pass
 
     def logic(self):
-        pass
+        self.text = self.font.render("This is an example :)", True, self.text_colour)
 
     def draw(self):
-        pass
+        self.game.screen.blit(self.text, (100, 100))
