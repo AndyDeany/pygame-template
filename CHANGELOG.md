@@ -1,5 +1,13 @@
 # Changelog
 
+
+## 0.8.1
+
+* Fix a bug where using `pygame` functions in your `StartingView`
+(passed to `Game.__init__()`) would throw an error saying
+`pygame not initialised` or something similar.
+
+
 ## 0.8.0
 
 * Rename the `pygametemplate.game`, `pygametemplate.view`, and `pygametemplate.image`
