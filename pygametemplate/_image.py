@@ -10,7 +10,8 @@ class Image:
 
     def load(self):
         """Load the image into RAM."""
-        self.image = load_image(self.file)
+        if self.image is None:
+            self.image = load_image(self.file)
 
     def unload(self):
         """Unload the image from RAM."""
