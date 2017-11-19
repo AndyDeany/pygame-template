@@ -1,7 +1,7 @@
 from setuptools import setup
 
 
-version = "0.8.2"
+version = "0.8.3"
 url = "https://github.com/AndyDeany/pygame-template"
 
 with open("requirements.txt", "r") as requirements_file:
