@@ -9,6 +9,9 @@ method on your `Game` subclass.
 
 * Add new `Game.quit()` method which signals the game to exit.
 
+* Add new `Game.get_memory_use() -> int` method which returns the current
+memory usage of the game (RSS) in bytes.
+
 
 ## 0.8.2
 

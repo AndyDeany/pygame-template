@@ -9,6 +9,7 @@ try:
     # compile without it, then there's no need to import pygame_view whatsoever
 except ImportError:
     pass
+import psutil
 
 from pygametemplate import load_image
 from pygametemplate.system import System
@@ -90,6 +91,11 @@ class Game:
     def _quit(self):
         self.on_quit()
         pygame.quit()
+
+    @staticmethod
+    def get_memory_use():
+        """Return the current memory usage of the game (RSS) in bytes."""
+        return psutil.Process(os.getpid()).memory_info()[0]
 
     def initialise_screen(self, resolution=None, mode=None):
         """(Re)initialise the screen using the given resolution and mode."""
