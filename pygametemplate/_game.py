@@ -1,14 +1,13 @@
 import os
+from contextlib import suppress
 import time
 from importlib import import_module
 
 import pygame
-try:
+with suppress(ImportError):
     import pygame._view     # sometimes necessary. If it isn't this will cause an error
     #! UPDATE: this might only be necessary for py2exe to work, so if you can
     # compile without it, then there's no need to import pygame_view whatsoever
-except ImportError:
-    pass
 import psutil
 
 from pygametemplate import load_image

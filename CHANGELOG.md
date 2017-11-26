@@ -13,6 +13,13 @@ method on your `Game` subclass.
 memory usage of the game (RSS) in bytes.
 
 
+## 0.8.3
+
+* `Image.load()` no longer reloads the image if the image is already loaded
+when it's called. This means that even if `Image.load()` is called twice
+sequentially, the image is only loaded once, saving CPU cycles.
+
+
 ## 0.8.2
 
 * Change `Game.set_view()` to take `view_name: str` instead of
