@@ -8,6 +8,3 @@ class ExampleGame(Game):
 
     def draw(self):
         pass
-
-    def quit(self):
-        pass
