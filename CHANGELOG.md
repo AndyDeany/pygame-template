@@ -28,6 +28,8 @@ If you want to add custom functionality, you can now define the `on_quit()`
 method on your `Game` subclass.
 
 * Add new `Game.quit()` method which signals the game to exit.
+**Be sure not to override this method: there is a high chance you already
+have, as this was required in previous versions.**
 
 * Add new `Game.get_memory_use() -> int` method which returns the current
 memory usage of the game (RSS) in bytes.
