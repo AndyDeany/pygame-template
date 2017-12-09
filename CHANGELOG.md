@@ -12,8 +12,11 @@ method on your `Game` subclass.
 * Add new `Game.get_memory_use() -> int` method which returns the current
 memory usage of the game (RSS) in bytes.
 
-
-## 0.8.3
+* `Game.__init__()` now takes an optional `max_allowed_ram` keyword argument,
+which defaults to `1**30` bytes (1GB). Previous views are now cached by the
+game and are reused if they're still loaded into RAM. Old views are only
+unloaded from RAM if the current RAM usage of the game goes over the maximum
+allowed amount.
 
 * `Image.load()` no longer reloads the image if the image is already loaded
 when it's called. This means that even if `Image.load()` is called twice

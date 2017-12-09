@@ -26,7 +26,8 @@ class Game:
     VIEW_MODULE = "lib.views"
 
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed",
-                 *, caption="Insert name here v0.1.0", icon=None):
+                 *, caption="Insert name here v0.1.0", icon=None,
+                 max_allowed_ram=1**30):
         """Create a new Game object.
 
         `icon` should be the name of an image file.
@@ -40,7 +41,8 @@ class Game:
         if icon is not None:
             pygame.display.set_icon(load_image(icon))
 
-        self.last_view = None
+        self.max_allowed_ram = max_allowed_ram
+        self.previous_views = []
         self.current_view = StartingView(self)
 
         self.fps = 60
@@ -53,10 +55,20 @@ class Game:
 
     def set_view(self, view_name: str):
         """Set the current view to the View class with the given name."""
-        self.last_view = self.current_view
-        self.last_view.unload()
+        self.previous_views.append(self.current_view)
         View = self.get_view_class(view_name)   # pylint: disable=invalid-name
-        self.current_view = View(self)
+        for view in reversed(self.previous_views):
+            if isinstance(view, View):
+                self.current_view = view
+                self.previous_views.remove(view)
+                break
+        else:
+            self.current_view = View(self)
+
+        while get_memory_use() > self.max_allowed_ram:
+            oldest_view = self.previous_views.pop(0)
+            oldest_view.unload()
+
 
     def get_view_class(self, view_name: str):
         """Return the View class with the given view_name."""
