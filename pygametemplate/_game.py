@@ -65,10 +65,9 @@ class Game:
         else:
             self.current_view = View(self)
 
-        while get_memory_use() > self.max_allowed_ram:
+        while self.get_memory_use() > self.max_allowed_ram:
             oldest_view = self.previous_views.pop(0)
             oldest_view.unload()
-
 
     def get_view_class(self, view_name: str):
         """Return the View class with the given view_name."""
