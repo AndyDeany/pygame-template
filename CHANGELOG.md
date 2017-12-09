@@ -1,7 +1,19 @@
 # Changelog
 
 
+# 0.9.2
+
+* Fix bug which caused the game to crash when a single view used up
+more than `game.max_allowed_ram`.
+
+* Fix default `max_allowed_ram` to be 1GB as it was supposed to be.
+It was incorrectly set to 1B in previous versions.
+
+
 # 0.9.1
+
+**Warning**: This version has a bug in it meaning its functionality is
+limited. Please use version 0.9.2 instead.
 
 * Fix fatal bug (bad reference) in `Game.set_view()` that caused a crash 100% of the time.
 
@@ -9,13 +21,15 @@
 ## 0.9.0
 
 **Warning**: This version has a fatal bug in it meaning its functionality is
-severly limited. Please use version 0.9.1 instead.
+severly limited. Please use version 0.9.2 instead.
 
 * Rename `Game.quit()` to `Game.on_quit()` and make it optional to implement.
 If you want to add custom functionality, you can now define the `on_quit()`
 method on your `Game` subclass.
 
 * Add new `Game.quit()` method which signals the game to exit.
+**Be sure not to override this method: there is a high chance you already
+have, as this was required in previous versions.**
 
 * Add new `Game.get_memory_use() -> int` method which returns the current
 memory usage of the game (RSS) in bytes.
