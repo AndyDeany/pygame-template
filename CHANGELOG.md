@@ -1,7 +1,15 @@
 # Changelog
 
 
+# 0.9.1
+
+* Fix fatal bug (bad reference) in `Game.set_view()` that caused a crash 100% of the time.
+
+
 ## 0.9.0
+
+**Warning**: This version has a fatal bug in it meaning its functionality is
+severly limited. Please use version 0.9.1 instead.
 
 * Rename `Game.quit()` to `Game.on_quit()` and make it optional to implement.
 If you want to add custom functionality, you can now define the `on_quit()`
