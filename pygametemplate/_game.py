@@ -27,7 +27,7 @@ class Game:
 
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed",
                  *, caption="Insert name here v0.1.0", icon=None,
-                 max_allowed_ram=1**30):
+                 max_allowed_ram=1 * 2**30):
         """Create a new Game object.
 
         `icon` should be the name of an image file.
@@ -65,7 +65,7 @@ class Game:
         else:
             self.current_view = View(self)
 
-        while self.get_memory_use() > self.max_allowed_ram:
+        while self.previous_views and self.get_memory_use() > self.max_allowed_ram:
             oldest_view = self.previous_views.pop(0)
             oldest_view.unload()
 
