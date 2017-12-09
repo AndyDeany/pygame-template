@@ -1,14 +1,14 @@
 import os
+from contextlib import suppress
 import time
 from importlib import import_module
 
 import pygame
-try:
+with suppress(ImportError):
     import pygame._view     # sometimes necessary. If it isn't this will cause an error
     #! UPDATE: this might only be necessary for py2exe to work, so if you can
     # compile without it, then there's no need to import pygame_view whatsoever
-except ImportError:
-    pass
+import psutil
 
 from pygametemplate import load_image
 from pygametemplate.system import System
@@ -26,7 +26,8 @@ class Game:
     VIEW_MODULE = "lib.views"
 
     def __init__(self, StartingView, resolution=(1280, 720), mode="windowed",
-                 *, caption="Insert name here v0.1.0", icon=None):
+                 *, caption="Insert name here v0.1.0", icon=None,
+                 max_allowed_ram=1**30):
         """Create a new Game object.
 
         `icon` should be the name of an image file.
@@ -40,7 +41,8 @@ class Game:
         if icon is not None:
             pygame.display.set_icon(load_image(icon))
 
-        self.last_view = None
+        self.max_allowed_ram = max_allowed_ram
+        self.previous_views = []
         self.current_view = StartingView(self)
 
         self.fps = 60
@@ -53,10 +55,20 @@ class Game:
 
     def set_view(self, view_name: str):
         """Set the current view to the View class with the given name."""
-        self.last_view = self.current_view
-        self.last_view.unload()
+        self.previous_views.append(self.current_view)
         View = self.get_view_class(view_name)   # pylint: disable=invalid-name
-        self.current_view = View(self)
+        for view in reversed(self.previous_views):
+            if isinstance(view, View):
+                self.current_view = view
+                self.previous_views.remove(view)
+                break
+        else:
+            self.current_view = View(self)
+
+        while get_memory_use() > self.max_allowed_ram:
+            oldest_view = self.previous_views.pop(0)
+            oldest_view.unload()
+
 
     def get_view_class(self, view_name: str):
         """Return the View class with the given view_name."""
@@ -68,8 +80,12 @@ class Game:
     def draw(self):
         raise NotImplementedError
 
+    def on_quit(self):
+        pass
+
     def quit(self):
-        raise NotImplementedError
+        """Signal the game to quit."""
+        self.running = False
 
     def _logic(self):
         self._check_quit()
@@ -84,8 +100,13 @@ class Game:
         self.console.draw()
 
     def _quit(self):
-        self.quit()
+        self.on_quit()
         pygame.quit()
+
+    @staticmethod
+    def get_memory_use():
+        """Return the current memory usage of the game (RSS) in bytes."""
+        return psutil.Process(os.getpid()).memory_info()[0]
 
     def initialise_screen(self, resolution=None, mode=None):
         """(Re)initialise the screen using the given resolution and mode."""
@@ -125,7 +146,7 @@ class Game:
         self.input.reset()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.running = False
+                self.quit()
             elif event.type == pygame.MOUSEMOTION:
                 self.input.mouse_pos = event.pos
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -150,7 +171,7 @@ class Game:
 
     def _check_quit(self):
         if self.quit_condition():
-            self.running = False
+            self.quit()
 
     def run(self):
         """Run the game."""

@@ -1,6 +1,29 @@
 # Changelog
 
 
+## 0.9.0
+
+* Rename `Game.quit()` to `Game.on_quit()` and make it optional to implement.
+If you want to add custom functionality, you can now define the `on_quit()`
+method on your `Game` subclass.
+
+* Add new `Game.quit()` method which signals the game to exit.
+
+* Add new `Game.get_memory_use() -> int` method which returns the current
+memory usage of the game (RSS) in bytes.
+Note that this adds a new pip requirement, the `psutil` module.
+
+* `Game.__init__()` now takes an optional `max_allowed_ram` keyword argument,
+which defaults to `1**30` bytes (1GB). Previous views are now cached by the
+game and are reused if they're still loaded into RAM. Old views are only
+unloaded from RAM if the current RAM usage of the game goes over the maximum
+allowed amount.
+
+* `Image.load()` no longer reloads the image if the image is already loaded
+when it's called. This means that even if `Image.load()` is called twice
+sequentially, the image is only loaded once, saving CPU cycles.
+
+
 ## 0.8.2
 
 * Change `Game.set_view()` to take `view_name: str` instead of
