@@ -22,6 +22,8 @@ Might just end up being expecting people to use
 * Add a `core.load_sound()` method.
 
 * Add `pygametemplate.Video` class to match `pygametemplate.Image`.
+This cannot use `pygame.movie` as it has been deprecated (and removed) from pygame.
+It will have to somehow be created using images and sounds instead.
 
 * Rename `Button.pressed` to `Button.is_pressed`? Same with `.held` and `.released`.
 `is_released` sounds a bit weird though, maybe `was_released`?
