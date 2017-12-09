@@ -1,2 +1,5 @@
 *.pyc
 log.txt
+build/
+dist/
+pygametemplate.egg-info/
