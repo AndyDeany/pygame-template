@@ -29,7 +29,9 @@ method on your `Game` subclass.
 
 * Add new `Game.quit()` method which signals the game to exit.
 **Be sure not to override this method: there is a high chance you already
-have, as this was required in previous versions.**
+have, as this was required in previous versions.** The previous functionality
+of this method has moved to `Game.on_quit()`, so if used, you should rename
+your `Game.quit()` methods to `Game.on_quit()`.
 
 * Add new `Game.get_memory_use() -> int` method which returns the current
 memory usage of the game (RSS) in bytes.
