@@ -11,6 +11,7 @@ method on your `Game` subclass.
 
 * Add new `Game.get_memory_use() -> int` method which returns the current
 memory usage of the game (RSS) in bytes.
+Note that this adds a new pip requirement, the `psutil` module.
 
 * `Game.__init__()` now takes an optional `max_allowed_ram` keyword argument,
 which defaults to `1**30` bytes (1GB). Previous views are now cached by the
